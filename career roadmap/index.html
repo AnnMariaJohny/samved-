@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SAMVED - Student Dashboard & Career Journey</title>
+  
+  <!-- LINKING EXTERNAL CSS FILE -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- LEFT NAVIGATION SIDEBAR -->
+  <aside class="sidebar">
+    <div class="brand">SAMVED <span>Portal</span></div>
+    
+    <div class="user-badge">
+      <div class="avatar" id="sidebar-avatar">A</div>
+      <div>
+        <div style="font-weight:700; font-size:14px;" id="sidebar-name">Anugrah</div>
+        <div style="font-size:12px; color:#94a3b8;" id="sidebar-role">Student</div>
+      </div>
+    </div>
+
+    <ul class="nav-menu">
+      <li id="nav-dashboard"><a href="../dashboard/index.html">Dashboard</a></li>
+      <li class="active" id="nav-roadmap"><a href="../career%20roadmap/index.html">Career Roadmap</a></li>
+      <li id="nav-progress"><a href="../progress%20tracker/index.html">Progress Tracker</a></li>
+      <li id="nav-tasks"><a href="../daily%20tasks/index.html">Daily Tasks</a></li>
+      <li id="nav-deadlines"><a href="../deadline%20system/index.html">Deadline System</a></li>
+      <li id="nav-opportunities"><a href="../oppertunity%20page/index.html">Opportunities</a></li>
+      <li id="nav-recommendations"><a href="../recommondation%20page/index.html">AI Recommendations</a></li>
+      <li id="nav-charts"><a href="../charts/index.html">Analytics &amp; Charts</a></li>
+    </ul>
+  </aside>
+
+  <!-- MAIN CONTENT AREA -->
+  <main class="main-wrapper">
+    
+    <!-- TOP HEADER BAR -->
+    <header class="top-bar">
+      <div class="page-header">
+        <h2 id="page-title">Dashboard</h2>
+      </div>
+      <div style="display:flex; align-items:center; gap:16px; flex-wrap:wrap; justify-content:flex-end;">
+        <span style="font-size:13px; color:var(--text-muted);">Student: <strong id="header-profile-name" style="color:var(--text-dark);">Anugrah</strong></span>
+        <span style="font-size:13px; color:var(--text-muted);">Current Goal: <strong id="header-goal-text" style="color:var(--accent-blue);">Scientist</strong></span>
+      </div>
+    </header>
+
+    <!-- MEMBER 1 DATA SYNC CONTROLLER (SIMULATOR BAR) -->
+    <section class="m1-sync-bar">
+      <span><strong>Member 1 Sync Panel:</strong> Test profile changes:</span>
+      <div>
+        <label>Name:</label>
+        <input type="text" id="m1-name" value="Anugrah">
+      </div>
+      <div>
+        <label>Education Stage:</label>
+        <select id="m1-edu">
+          <option value="10th">10th Passed</option>
+          <option value="12th Science">12th Science Passed</option>
+          <option value="Bachelor's" selected>Bachelor's (In Progress)</option>
+          <option value="Master's">Master's Passed</option>
+        </select>
+      </div>
+      <div>
+        <label>Career Goal:</label>
+        <select id="m1-goal">
+          <option value="Scientist" selected>Scientist</option>
+          <option value="Software Engineer">Software Engineer</option>
+          <option value="Researcher">Researcher</option>
+        </select>
+      </div>
+      <button class="btn-sync" onclick="syncMember1Data()">Apply & Refresh Dashboard</button>
+      <span id="profile-save-status" role="status" aria-live="polite" style="font-size:12px; color:#166534;"></span>
+    </section>
+
+    <!-- 1. DASHBOARD VIEW -->
+    <div id="view-dashboard" class="view-panel active">
+      <div class="dashboard-container">
+
+        <!-- WELCOME BANNER -->
+        <div class="card welcome-card">
+          <h1 id="welcome-heading">Welcome back, Anugrah!</h1>
+          <p style="color:var(--text-muted); font-size:14px;">Here is your continuous career trajectory and active roadmap progress.</p>
+        </div>
+
+        <!-- SHINING CAREER ROADMAP STAGE -->
+        <div class="roadmap-wrapper">
+          <div class="card-title">
+            <span>Career Roadmap Summary</span>
+            <span style="font-size:14px; font-weight:600; color:var(--accent-blue);" id="roadmap-pct">42% Complete</span>
+          </div>
+          
+          <div class="roadmap-timeline" id="roadmap-nodes-container">
+            <!-- Dynamically populated by JavaScript -->
+          </div>
+
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" id="overall-progress-bar" style="width: 42%;"></div>
+          </div>
+        </div>
+
+        <!-- GRID LAYOUT -->
+        <div class="dash-grid">
+
+          <!-- LEFT COLUMN -->
+          <div style="display:flex; flex-direction:column; gap:24px;">
+            <div class="next-step-card">
+              <div>
+                <span class="next-step-badge">NEXT ACTION STEP</span>
+                <h3 style="margin-bottom:6px; color:var(--text-dark);" id="next-step-title">Complete Research Project</h3>
+                <p style="font-size:13px; color:#475569;">Draft and submit your research methodology findings by end of term.</p>
+              </div>
+              <button class="btn-gold" onclick="completeNextStep()">Mark Completed</button>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Selected Opportunities</div>
+              <div class="opp-grid" id="opportunities-grid"></div>
+            </div>
+          </div>
+
+          <!-- RIGHT COLUMN -->
+          <div style="display:flex; flex-direction:column; gap:24px;">
+            <div class="card">
+              <div class="card-title">Upcoming Deadlines</div>
+              <div id="deadlines-container"></div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Daily Tasks</div>
+              <div class="task-input-group">
+                <input type="text" id="new-task-input" placeholder="Add new daily task...">
+                <button class="btn-sync" onclick="addNewTask()">Add</button>
+              </div>
+              <ul class="task-list" id="task-list-container"></ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. FULL CAREER ROADMAP VIEW (SECTION 4.2) -->
+    <div id="view-roadmap" class="view-panel">
+      <div class="dashboard-container">
+        <div class="card">
+          <div class="card-title">
+            <span>Detailed Career Roadmap: <strong id="roadmap-goal-title" style="color:var(--accent-blue)">Research Scientist</strong></span>
+            <span style="font-size:13px; font-weight:normal; color:var(--text-muted)">Powered by Java Backend API</span>
+          </div>
+          <p style="color:var(--text-muted); font-size:14px; margin-bottom:24px;">
+            Each stage shows requirements, target skills, status, and completion state dynamically retrieved for your target goal.
+          </p>
+
+          <div class="roadmap-stages-grid" id="roadmap-stages-container">
+            <!-- Dynamically populated by script.js -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- LINKING EXTERNAL JAVASCRIPT FILE -->
+  <script src="../profile.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

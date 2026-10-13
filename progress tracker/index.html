@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SAMVED - Student Dashboard & Career Journey</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- SIDEBAR NAVIGATION -->
+  <aside class="sidebar">
+    <div class="brand">SAMVED <span>Portal</span></div>
+    
+    <div class="user-badge">
+      <div class="avatar" id="sidebar-avatar">A</div>
+      <div>
+        <div style="font-weight:700; font-size:14px;" id="sidebar-name">Anugrah</div>
+        <div style="font-size:12px; color:#94a3b8;" id="sidebar-role">Student</div>
+      </div>
+    </div>
+
+    <ul class="nav-menu">
+      <li id="nav-dashboard"><a href="../dashboard/index.html">Dashboard</a></li>
+      <li id="nav-roadmap"><a href="../career%20roadmap/index.html">Career Roadmap</a></li>
+      <li class="active" id="nav-progress"><a href="../progress%20tracker/index.html">Progress Tracker</a></li>
+      <li id="nav-tasks"><a href="../daily%20tasks/index.html">Daily Tasks</a></li>
+      <li id="nav-deadlines"><a href="../deadline%20system/index.html">Deadline System</a></li>
+      <li id="nav-opportunities"><a href="../oppertunity%20page/index.html">Opportunities</a></li>
+      <li id="nav-recommendations"><a href="../recommondation%20page/index.html">AI Recommendations</a></li>
+      <li id="nav-charts"><a href="../charts/index.html">Analytics &amp; Charts</a></li>
+    </ul>
+  </aside>
+
+  <!-- MAIN WRAPPER -->
+  <main class="main-wrapper">
+    
+    <!-- TOP BAR -->
+    <header class="top-bar">
+      <div class="page-header">
+        <h2 id="page-title">Dashboard</h2>
+      </div>
+      <div style="display:flex; align-items:center; gap:16px; flex-wrap:wrap; justify-content:flex-end;">
+        <span style="font-size:13px; color:var(--text-muted);">Student: <strong id="header-profile-name" style="color:var(--text-dark);">Anugrah</strong></span>
+        <span style="font-size:13px; color:var(--text-muted);">Current Goal: <strong id="header-goal-text" style="color:var(--accent-blue);">Scientist</strong></span>
+      </div>
+    </header>
+
+    <!-- MEMBER 1 DATA SYNC CONTROLLER -->
+    <section class="m1-sync-bar">
+      <span><strong>Member 1 Sync Panel:</strong> Test profile changes:</span>
+      <div>
+        <label>Name:</label>
+        <input type="text" id="m1-name" value="Anugrah">
+      </div>
+      <div>
+        <label>Education Stage:</label>
+        <select id="m1-edu">
+          <option value="10th">10th Passed</option>
+          <option value="12th Science">12th Science Passed</option>
+          <option value="Bachelor's" selected>Bachelor's (In Progress)</option>
+          <option value="Master's">Master's Passed</option>
+        </select>
+      </div>
+      <div>
+        <label>Career Goal:</label>
+        <select id="m1-goal">
+          <option value="Scientist" selected>Scientist</option>
+          <option value="Software Engineer">Software Engineer</option>
+          <option value="Researcher">Researcher</option>
+        </select>
+      </div>
+      <button class="btn-sync" onclick="syncMember1Data()">Apply & Refresh Dashboard</button>
+      <span id="profile-save-status" role="status" aria-live="polite" style="font-size:12px; color:#166534;"></span>
+    </section>
+
+    <!-- 1. DASHBOARD VIEW -->
+    <div id="view-dashboard" class="view-panel active">
+      <div class="dashboard-container">
+        <div class="card welcome-card">
+          <h1 id="welcome-heading">Welcome back, Anugrah!</h1>
+          <p style="color:var(--text-muted); font-size:14px;">Here is your continuous career trajectory and active roadmap progress.</p>
+        </div>
+
+        <div class="roadmap-wrapper">
+          <div class="card-title">
+            <span>Career Roadmap Summary</span>
+            <span style="font-size:14px; font-weight:600; color:var(--accent-blue);" id="roadmap-pct">42% Complete</span>
+          </div>
+          
+          <div class="roadmap-timeline" id="roadmap-nodes-container"></div>
+
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" id="overall-progress-bar" style="width: 42%;"></div>
+          </div>
+        </div>
+
+        <div class="dash-grid">
+          <div style="display:flex; flex-direction:column; gap:24px;">
+            <div class="next-step-card">
+              <div>
+                <span class="next-step-badge">NEXT ACTION STEP</span>
+                <h3 style="margin-bottom:6px; color:var(--text-dark);" id="next-step-title">Complete Research Project</h3>
+                <p style="font-size:13px; color:#475569;">Draft and submit your research methodology findings by end of term.</p>
+              </div>
+              <button class="btn-gold" onclick="completeNextStep()">Mark Completed</button>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Selected Opportunities</div>
+              <div class="opp-grid" id="opportunities-grid"></div>
+            </div>
+          </div>
+
+          <div style="display:flex; flex-direction:column; gap:24px;">
+            <div class="card">
+              <div class="card-title">Upcoming Deadlines</div>
+              <div id="deadlines-container"></div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Daily Tasks</div>
+              <div class="task-input-group">
+                <input type="text" id="new-task-input" placeholder="Add new daily task...">
+                <button class="btn-sync" onclick="addNewTask()">Add</button>
+              </div>
+              <ul class="task-list" id="task-list-container"></ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. CAREER ROADMAP VIEW (4.2) -->
+    <div id="view-roadmap" class="view-panel">
+      <div class="dashboard-container">
+        <div class="card">
+          <div class="card-title">
+            <span>Detailed Career Roadmap: <strong id="roadmap-goal-title" style="color:var(--accent-blue)">Research Scientist</strong></span>
+            <span style="font-size:13px; font-weight:normal; color:var(--text-muted)">Powered by Java Backend API</span>
+          </div>
+          <div class="roadmap-stages-grid" id="roadmap-stages-container"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. PROGRESS TRACKING VIEW (4.3) -->
+    <div id="view-progress" class="view-panel">
+      <div class="dashboard-container">
+        
+        <!-- Overall Progress Metrics Header -->
+        <div class="card progress-overview-card">
+          <div>
+            <span style="font-size:12px; font-weight:800; color:var(--accent-blue); text-transform:uppercase;">Calculated by Backend</span>
+            <h2 style="font-size:24px; margin-top:4px;">Overall Career Progress</h2>
+          </div>
+          <div class="big-stat-badge" id="backend-progress-pct">42%</div>
+        </div>
+
+        <!-- Milestones Focus Grid -->
+        <div class="progress-milestones-grid">
+          
+          <!-- CURRENT MILESTONE -->
+          <div class="card milestone-focus-card current-milestone-border">
+            <span class="milestone-label-tag tag-gold">Current Milestone</span>
+            <h3 style="font-size:18px; margin:8px 0 4px 0;" id="current-ms-title">Current Research Project</h3>
+            <p style="font-size:13px; color:var(--text-muted);" id="current-ms-desc">Execute literature review, methodology setup, and data collection.</p>
+            <div style="margin-top:16px;">
+              <span style="font-size:12px; font-weight:700; color:var(--text-dark);">Backend Status:</span>
+              <span class="stage-badge badge-active">In Progress</span>
+            </div>
+          </div>
+
+          <!-- NEXT MILESTONE -->
+          <div class="card milestone-focus-card next-milestone-border">
+            <span class="milestone-label-tag tag-blue">Next Milestone</span>
+            <h3 style="font-size:18px; margin:8px 0 4px 0;" id="next-ms-title">Research Internship</h3>
+            <p style="font-size:13px; color:var(--text-muted);" id="next-ms-desc">Apply and secure an 8-week research internship at a recognized lab.</p>
+            <div style="margin-top:16px;">
+              <span style="font-size:12px; font-weight:700; color:var(--text-dark);">Backend Status:</span>
+              <span class="stage-badge badge-locked">Queued</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- COMPLETED MILESTONES LIST -->
+        <div class="card">
+          <div class="card-title">Completed Milestones</div>
+          <ul class="completed-milestone-list" id="completed-milestones-container">
+            <!-- Dynamically populated from backend response -->
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <script src="../profile.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
