@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>SAMVED Portal</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/style.css">
+
+<link rel="stylesheet" href="../api/roadmap-hub.css">
+</head>
+
+
+<body>
+
+
+<div class="portal-layout">
+
+
+    <!-- =================================================
+         SIDEBAR
+    ================================================= -->
+
+    <aside class="sidebar">
+
+
+        <!-- LOGO -->
+
+        <div class="sidebar-logo">
+
+            <h1>
+                SAMVED <span>Portal</span>
+            </h1>
+
+        </div>
+
+
+        <!-- STUDENT -->
+
+        <div class="student-box">
+
+            <div
+                class="student-avatar"
+                id="studentAvatar">
+
+                S
+
+            </div>
+
+
+            <div class="student-details">
+
+                <strong id="sidebarStudentName">
+                    Student
+                </strong>
+
+                <span>
+                    Student
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- NAVIGATION -->
+
+        <nav class="sidebar-nav">
+
+
+            <a
+                href="profile.html"
+                class="active">
+
+                Profile
+
+            </a>
+
+
+            <a href="academic.html">
+
+                Academic Details
+
+            </a>
+
+
+            <a href="interests.html">
+
+                Interests
+
+            </a>
+
+
+            <a href="skills.html">
+
+                Skills
+
+            </a>
+
+
+            <a href="strengths.html">
+
+                Strengths
+
+            </a>
+
+
+            <a href="values.html">
+
+                Values
+
+            </a>
+
+
+            <a href="careergoal.html">
+
+                Career Goal
+
+            </a>
+
+
+            <a href="../assessment/assessment.html">
+
+                Assessment
+
+            </a>
+
+
+            <a href="../dashboard/index.html">Dashboard &amp; Career Journey</a>
+</nav>
+
+
+        <!-- LOGOUT -->
+
+        <div class="sidebar-bottom">
+
+            <button
+                type="button"
+                class="sidebar-logout"
+                onclick="logout()">
+
+                Logout
+
+            </button>
+
+        </div>
+
+
+    </aside>
+
+
+    <!-- =================================================
+         MAIN CONTENT
+    ================================================= -->
+
+    <main class="portal-main">
+
+
+        <!-- TOP HEADER -->
+
+        <header class="portal-header">
+
+            <h2>
+                Student Profile
+            </h2>
+
+
+            <div class="header-student">
+
+                Student:
+                <strong id="headerStudentName">
+                    Student
+                </strong>
+
+            </div>
+
+        </header>
+
+
+        <!-- CONTENT -->
+
+        <div class="portal-content">
+
+
+            <!-- WELCOME -->
+
+            <div class="welcome-section">
+
+                <h2 id="welcomeMessage">
+                    Welcome!
+                </h2>
+
+                <p>
+                    Your personal career guidance space
+                </p>
+
+            </div>
+
+
+            <!-- =================================================
+                 PROFILE COMPLETION
+            ================================================= -->
+
+            <div class="profile-card">
+
+                <h2>
+                    Profile Completion
+                </h2>
+
+
+                <p id="progressText">
+                    0 of 8 sections completed
+                </p>
+
+
+                <div class="completion-bar">
+
+                    <div
+                        class="completion-fill"
+                        id="completionFill">
+                    </div>
+
+                </div>
+
+
+                <p id="completionPercentage">
+                    0%
+                </p>
+
+            </div>
+
+
+            <!-- =================================================
+                 PERSONAL PROFILE
+            ================================================= -->
+
+            <div class="profile-card">
+
+                <h2>
+                    My Profile
+                </h2>
+
+
+                <p>
+                    Your basic personal information
+                </p>
+
+
+                <div class="profile-info-grid">
+
+
+                    <!-- NAME -->
+
+                    <div class="profile-field">
+
+                        <label for="name">
+                            Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="name"
+                            disabled>
+
+                    </div>
+
+
+                    <!-- EMAIL -->
+
+                    <div class="profile-field">
+
+                        <label for="email">
+                            Email
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            disabled>
+
+                    </div>
+
+
+                    
+
+
+                    <!-- LOCATION -->
+
+                    <div class="profile-field">
+
+                        <label for="location">
+                            Location
+                        </label>
+
+                        <input
+                            type="text"
+                            id="location"
+                            disabled>
+
+                    </div>
+  <!-- EDUCATION LEVEL -->
+
+    <div class="profile-field">
+        <label for="education">Education Level</label>
+
+          <select id="education" disabled>
+               <option value="">Select Education</option>
+               <option value="school">School</option>
+               <option value="higher-secondary">Higher Secondary</option>
+               <option value="undergraduate">Undergraduate</option>
+               <option value="postgraduate">Postgraduate</option>
+               <option value="other">Other</option>
+          </select>
+    </div>
+
+                <!-- PROFILE BUTTONS -->
+
+                <div class="profile-buttons">
+
+                    <button
+                        type="button"
+                        id="editButton">
+
+                        Edit Profile
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        id="saveButton"
+                        style="display: none;">
+
+                        Save Profile
+
+                    </button>
+
+                </div>
+
+
+                <p id="profileMessage"></p>
+
+            </div>
+
+            <div class="profile-card">
+
+                <h2>
+                    Build Your Career Profile
+                </h2>
+
+
+                <p>
+                    Complete each section so SAMVED can
+                    understand your goals, interests,
+                    skills, strengths and values.
+                </p>
+
+
+                <div class="module-grid">
+
+
+                    <!-- ACADEMICS -->
+
+                    <div class="module-card">
+
+                        <div>
+
+                            <div class="module-top">
+
+                                <h3>
+                                    Academic Details
+                                </h3>
+
+                            </div>
+
+
+                            <p>
+                                Add your education,
+                                subjects, marks and
+                                academic records.
+                            </p>
+
+                        </div>
+
+
+                        <div>
+
+                            <div
+                                class="module-status"
+                                id="academicStatus">
+
+                                Complete your academic profile
+
+                            </div>
+
+
+                            <a
+                                href="academic.html"
+                                class="module-button">
+
+                                Open Academics
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- INTERESTS -->
+
+                    <div class="module-card">
+
+                        <div>
+
+                            <div class="module-top">
+
+                                <h3>
+                                    Interests
+                                </h3>
+
+                            </div>
+
+
+                            <p>
+                                Tell SAMVED what subjects
+                                and areas you enjoy.
+                            </p>
+
+                        </div>
+
+
+                        <div>
+
+                            <div
+                                class="module-status"
+                                id="interestsStatus">
+
+                                Choose your interests
+
+                            </div>
+
+
+                            <a
+                                href="interests.html"
+                                class="module-button">
+
+                                Open Interests
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- SKILLS -->
+
+                    <div class="module-card">
+
+                        <div>
+
+                            <div class="module-top">
+
+                                <h3>
+                                    Skills
+                                </h3>
+
+                            </div>
+
+
+                            <p>
+                                Add your skills and choose
+                                your proficiency level.
+                            </p>
+
+                        </div>
+
+
+                        <div>
+
+                            <div
+                                class="module-status"
+                                id="skillsStatus">
+
+                                Add your skills
+
+                            </div>
+
+
+                            <a
+                                href="skills.html"
+                                class="module-button">
+
+                                Open Skills
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- STRENGTHS -->
+
+                    <div class="module-card">
+
+                        <div>
+
+                            <div class="module-top">
+
+                                <h3>
+                                    Strengths
+                                </h3>
+
+                            </div>
+
+
+                            <p>
+                                Identify the abilities and
+                                qualities that describe you.
+                            </p>
+
+                        </div>
+
+
+                        <div>
+
+                            <div
+                                class="module-status"
+                                id="strengthsStatus">
+
+                                Discover your strengths
+
+                            </div>
+
+
+                            <a
+                                href="strengths.html"
+                                class="module-button">
+
+                                Open Strengths
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- VALUES -->
+
+                    <div class="module-card">
+
+                        <div>
+
+                            <div class="module-top">
+
+                                <h3>
+                                    Values
+                                </h3>
+
+                            </div>
+
+
+                            <p>
+                                Select the values that
+                                matter most to you.
+                            </p>
+
+                        </div>
+
+
+                        <div>
+
+                            <div
+                                class="module-status"
+                                id="valuesStatus">
+
+                                Define what matters to you
+
+                            </div>
+
+
+                            <a
+                                href="values.html"
+                                class="module-button">
+
+                                Open Values
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- CAREER GOAL -->
+
+                    <div class="module-card">
+
+                        <div>
+
+                            <div class="module-top">
+
+                                <h3>
+                                    Career Goal
+                                </h3>
+
+                            </div>
+
+
+                            <p>
+                                Choose or describe the
+                                career you are interested in.
+                            </p>
+
+                        </div>
+
+
+                        <div>
+
+                            <div
+                                class="module-status"
+                                id="careerStatus">
+
+                                Set your career direction
+
+                            </div>
+
+
+                            <a
+                                href="careergoal.html"
+                                class="module-button">
+
+                                Open Career Goal
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ASSESSMENT -->
+
+                    <div class="module-card">
+
+                        <div>
+
+                            <div class="module-top">
+
+                                <h3>
+                                    Assessment
+                                </h3>
+
+                            </div>
+
+
+                            <p>
+                                Answer a short assessment
+                                about your interests and
+                                work preferences.
+                            </p>
+
+                        </div>
+
+
+                        <div>
+
+                            <div
+                                class="module-status"
+                                id="assessmentStatus">
+
+                                Discover your direction
+
+                            </div>
+
+
+                            <a
+                                href="../assessment/assessment.html"
+                                class="module-button">
+
+                                Start Assessment
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    <section class="profile-card account-settings"><h2>Account settings</h2><form id="passwordForm"><label for="currentPassword">Current password</label><input id="currentPassword" type="password" autocomplete="current-password" required><label for="newPassword">New password</label><input id="newPassword" type="password" autocomplete="new-password" minlength="8" maxlength="72" required><label for="repeatPassword">Repeat new password</label><input id="repeatPassword" type="password" autocomplete="new-password" required><p>Use uppercase, lowercase, a number and a special character.</p><button type="submit">Change password</button></form><hr><button id="deleteAccount" type="button">Delete my account and saved data</button></section></main>
+
+</div>
+
+
+
+
+
+
+
+
+<script src="../api/developer-a-api.js"></script>
+<script src="../api/session.js"></script>
+<script src="profile-sections.js"></script>
+<script src="survey-navigation.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Academic Details - SAMVED</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/style.css">
+
+        
+
+<link rel="stylesheet" href="../api/roadmap-hub.css">
+</head>
+
+
+<body>
+
+
+
+<!-- PORTAL -->
+
+<div class="portal-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="sidebar-logo">
+            <h1>SAMVED <span>Portal</span></h1>
+        </div>
+
+        <div class="student-box">
+
+            <div
+                class="student-avatar"
+                id="studentAvatar">
+                S
+            </div>
+
+            <div class="student-details">
+
+                <strong id="sidebarStudentName">
+                    Student
+                </strong>
+
+                <span>
+                    Student
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+            <a href="profile.html">
+                Profile
+            </a>
+
+            <a href="academic.html" class="active">
+                Academic Details
+            </a>
+
+            <a href="interests.html">
+                Interests
+            </a>
+
+            <a href="skills.html">
+
+                Skills
+            </a>
+
+            <a href="strengths.html">
+
+                Strengths
+            </a>
+
+            <a href="values.html">
+
+                Values
+            </a>
+
+            <a href="careergoal.html">
+
+                Career Goal
+            </a>
+
+            <a href="../assessment/assessment.html">
+
+                Assessment
+            </a>
+
+            <a href="../dashboard/index.html">Dashboard &amp; Career Journey</a>
+</nav>
+
+
+        <div class="sidebar-bottom">
+
+            <button
+                type="button"
+                class="sidebar-logout"
+                onclick="logout()">
+
+                Logout
+
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+
+    <main class="portal-main">
+
+        <header class="portal-header">
+
+            <h2 id="pageTitle">
+                Academic Details
+            </h2>
+
+            <div class="header-student">
+
+                Student:
+                <strong id="headerStudentName">
+                    Student
+                </strong>
+
+            </div>
+
+        </header>
+
+
+
+
+<!-- STUDENT NAME -->
+
+
+
+<div class="profile-container">
+
+    <h1>SAMVED</h1>
+
+    <p class="profile-subtitle">
+        Academic Details
+    </p>
+
+    <div class="profile-card">
+
+        <h2>Add Academic Record</h2>
+
+        <p>
+            Enter your course and academic period,
+            then add all subjects for that record.
+        </p>
+
+
+        <div class="academic-grid">
+
+
+            <!-- EDUCATION LEVEL -->
+
+            <div class="academic-field">
+
+                <label for="educationLevel">
+                    Education Level
+                </label>
+
+                <select id="educationLevel">
+
+                    <option value="">
+                        Select Education Level
+                    </option>
+
+                    <option value="School">
+                        School
+                    </option>
+
+                    <option value="Higher Secondary">
+                        Higher Secondary
+                    </option>
+
+                    <option value="Undergraduate">
+                        Undergraduate
+                    </option>
+
+                    <option value="Postgraduate">
+                        Postgraduate
+                    </option>
+
+                    <option value="Other">
+                        Other
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- SCHOOL / COLLEGE -->
+
+            <div class="academic-field">
+
+                <label for="institution">
+                    School / College
+                </label>
+
+                <input
+                    type="text"
+                    id="institution"
+                    placeholder="Example: ABC College">
+
+            </div>
+
+
+            <!-- COURSE -->
+
+            <div class="academic-field">
+
+                <label for="course">
+                    Course
+                </label>
+
+                <input
+                    type="text"
+                    id="course"
+                    placeholder="Example: CSE">
+
+            </div>
+
+
+            <!-- CLASS / SEMESTER -->
+
+            <div class="academic-field">
+
+                <label for="academicPeriodType">
+                    Academic Period
+                </label>
+
+                <select id="academicPeriodType">
+
+                    <option value="">
+                        Select Type
+                    </option>
+
+                    <option value="Class">
+                        Class
+                    </option>
+
+                    <option value="Semester">
+                        Semester
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- PERIOD NUMBER -->
+
+            <div class="academic-field">
+
+                <label for="academicPeriod">
+                    Class / Semester Number
+                </label>
+
+                <input
+                    type="text"
+                    id="academicPeriod"
+                    placeholder="Example: 3">
+
+            </div>
+
+
+            <!-- CGPA / PERCENTAGE -->
+
+            <div class="academic-field">
+
+                <label for="overallScore">
+                    CGPA / Percentage
+                </label>
+
+                <label for="scoreType">Overall score scale</label><select id="scoreType"><option value="PERCENTAGE">Percentage (0–100)</option><option value="CGPA_10">CGPA (0–10)</option></select><input type="number" step="0.01" min="0" max="100" id="overallScore"
+                    placeholder="Example: 8.6 CGPA or 86%">
+
+            </div>
+
+        </div>
+
+        <div class="subjects-section">
+
+            <div class="subjects-header">
+
+                <h3>
+                    Subjects
+                </h3>
+
+                <button
+                    type="button"
+                    class="add-subject-button"
+                    onclick="addSubject()">
+
+                    + Add Subject
+
+                </button>
+
+            </div>
+
+
+            <p>
+                Add all subjects belonging to this
+                course and semester/class.
+            </p>
+
+
+            <div id="subjectsContainer">
+
+            </div>
+
+        </div>
+
+
+        <!-- SAVE -->
+
+        <button
+            type="button"
+            class="save-record-button"
+            onclick="saveAcademicRecord()">
+
+            Save Academic Record
+
+        </button>
+
+
+        <p id="academicMessage"></p>
+
+    </div>
+
+    <div class="profile-card">
+
+        <h2>Academic Records</h2>
+
+        <div id="academicRecords">
+
+            <p class="empty-records">
+                No academic records added yet.
+            </p>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
+
+
+<script src="../api/developer-a-api.js"></script>
+<script src="../api/session.js"></script>
+<script src="profile-sections.js"></script>
+<script src="survey-navigation.js"></script>
+</body>
+
+</html>

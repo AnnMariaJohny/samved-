@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Assessment - SAMVED</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/style.css">
+
+<link rel="stylesheet" href="../api/roadmap-hub.css">
+</head>
+
+
+<body>
+
+
+<div class="portal-layout">
+
+    <aside class="sidebar">
+
+
+        <!-- LOGO -->
+
+        <div class="sidebar-logo">
+
+            <h1>
+                SAMVED <span>Portal</span>
+            </h1>
+
+        </div>
+
+
+        <!-- STUDENT -->
+
+        <div class="student-box">
+
+            <div
+                class="student-avatar"
+                id="studentAvatar">
+
+                S
+
+            </div>
+
+
+            <div class="student-details">
+
+                <strong id="sidebarStudentName">
+                    Student
+                </strong>
+
+                <span>
+                    Student
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- NAVIGATION -->
+
+        <nav class="sidebar-nav">
+
+
+            <a href="../profile/profile.html">
+
+                Profile
+
+            </a>
+
+
+            <a href="../profile/academic.html">
+
+                Academic Details
+
+            </a>
+
+
+            <a href="../profile/interests.html">
+
+                Interests
+
+            </a>
+
+
+            <a href="../profile/skills.html">
+
+                Skills
+
+            </a>
+
+
+            <a href="../profile/strengths.html">
+
+                Strengths
+
+            </a>
+
+
+            <a href="../profile/values.html">
+
+                Values
+
+            </a>
+
+
+            <a href="../profile/careergoal.html">
+
+                Career Goal
+
+            </a>
+
+
+            <a
+                href="assessment.html"
+                class="active">
+                Assessment
+
+            </a>
+
+
+            <a href="../dashboard/index.html">Dashboard &amp; Career Journey</a>
+</nav>
+
+
+        <!-- LOGOUT -->
+
+        <div class="sidebar-bottom">
+
+            <button
+                type="button"
+                class="sidebar-logout"
+                onclick="logout()">
+
+                Logout
+
+            </button>
+
+        </div>
+
+
+    </aside>
+
+    <main class="portal-main">
+
+
+        <!-- TOP HEADER -->
+
+        <header class="portal-header">
+
+            <h2>
+                Career Assessment
+            </h2>
+
+
+            <div class="header-student">
+
+                Student:
+
+                <strong id="headerStudentName">
+                    Student
+                </strong>
+
+            </div>
+
+        </header>
+
+        <div class="portal-content">
+
+            <div class="profile-card assessment-card"
+                 id="assessmentCard">
+
+
+                <h2>
+                    Career Assessment
+                </h2>
+
+                <p id="assessmentStatus" role="status" aria-live="polite">Loading questions...</p>
+
+
+                <div
+                    class="question-number"
+                    id="questionNumber">
+
+                    Question 1 of 8
+
+                </div>
+
+
+                <div class="progress-bar">
+
+                    <div
+                        class="progress-fill"
+                        id="progressFill">
+
+                    </div>
+
+                </div>
+
+
+                <div id="questionArea">
+
+
+                    <div
+                        class="question-text"
+                        id="questionText">
+
+                        What type of work do you enjoy most?
+
+                    </div>
+
+
+                    <div id="answers">
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- BUTTONS -->
+
+                <div class="assessment-buttons">
+
+
+                    <button
+                        type="button"
+                        id="backButton"
+                        onclick="previousQuestion()"
+                        style="display: none;">
+
+                        Back
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        id="nextButton"
+                        disabled
+                        onclick="nextQuestion()">
+
+                        Next
+
+                    </button>
+
+
+                </div>
+
+
+            </div>
+
+            <div
+                class="profile-card assessment-card"
+                id="result"
+                style="display: none;">
+
+                <h2>
+                    🎉 Assessment Complete!
+                </h2>
+
+
+                <p>
+                    Your responses have been saved successfully.
+                </p>
+
+                <p id="assessmentResultSummary"></p>
+
+
+                <p>
+                    SAMVED can use these responses along with your
+                    academic details, interests, skills, strengths,
+                    values and career goal for future guidance.
+                </p>
+
+
+                <br>
+
+
+                <a
+                    href="../profile/profile.html"
+                    class="module-button">
+
+                    Return to Profile
+
+                </a>
+
+            </div>
+
+
+        </div>
+
+
+    </main>
+
+
+</div>
+
+<script src="../api/developer-a-api.js"></script>
+<script src="../api/session.js"></script>
+<script>
+    // The account name and logout state come from Christa's server session, never localStorage.
+    window.SamvedApi.request('GET', '/api/v1/auth/me')
+        .then(account => {
+            const name = account.name || account.profile?.name || 'Student';
+            document.getElementById('sidebarStudentName').textContent = name;
+            document.getElementById('headerStudentName').textContent = name;
+            document.getElementById('studentAvatar').textContent = name.charAt(0).toUpperCase();
+        })
+        .catch(() => {
+            document.getElementById('sidebarStudentName').textContent = 'Student';
+            document.getElementById('headerStudentName').textContent = 'Student';
+        });
+
+    async function logout() {
+        try {
+            await window.SamvedApi.request('POST', '/api/v1/auth/logout');
+            window.SamvedApi.clearCsrf();
+            window.location.href = '../auth/login.html';
+        } catch (error) {
+            alert(error.message || 'Sign out failed. Please try again.');
+        }
+    }
+</script>
+<script src="asessment.js"></script>
+<script src="../profile/survey-navigation.js"></script>
+
+
+</body>
+
+</html>

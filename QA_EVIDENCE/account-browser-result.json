@@ -1,0 +1,19 @@
+{
+  "base": "http://127.0.0.1:8080",
+  "database": "MySQL",
+  "passed": [
+    "Registration and automatic login",
+    "Profile save and reload",
+    "All six profile sections saved",
+    "Dashboard task, roadmap and milestone save",
+    "Analytics from saved records",
+    "All private feature pages opened",
+    "Assessment submitted and result loaded",
+    "Logout, login and persisted journey",
+    "Mobile profile layout",
+    "Password changed through profile and new password accepted",
+    "Account deletion through profile settings"
+  ],
+  "errors": [],
+  "checkedAt": "2026-10-15T06:30:06.942Z"
+}

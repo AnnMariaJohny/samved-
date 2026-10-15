@@ -1,0 +1,9 @@
+# Mandatory profile and assessment — 15 October 2026
+
+Users must save personal details, at least one academic record with subjects, interests, skills with proficiency, strengths, values, a career direction and all eight assessment answers. An explicitly chosen exploring career direction is valid. Empty-section review markers no longer satisfy completion and cannot be created through the review endpoint.
+
+Login resumes the first incomplete section. Profile and assessment pages show the requirement and saved completion progress. Dashboard, roadmaps, tasks, recommendations and other feature pages redirect incomplete users; feature APIs return HTTP 403 with `ONBOARDING_REQUIRED` and `nextPath`. Catalogue discovery now requires authentication and completed onboarding. Profile editing, assessment, password changes, logout and account deletion remain available. Clearing required data after completion locks features again.
+
+Verification: 58 tests passed across the suite and focused onboarding rerun; three optional provider tests skipped. The initial encoded URL assertion used a double-encoded MockMvc URL; it was corrected to use a URI and all six onboarding integration tests passed. Ownership/reminder tests isolate readiness with a mock; the onboarding and account integration tests use real saved profiles and sessions.
+
+The live MySQL browser check covers registration, login resuming the next required section, blocked direct pages and feature APIs, no empty-section skip, completing every section through the UI, all assessment answers, unlocking personalized suggestions and the 99-path catalogue, saved choices after login, changing interests, mobile layout and relocking after required data is removed. Disposable test accounts are deleted. See `mandatory-onboarding-result.json`, `mandatory-profile-prompt.png`, `mandatory-onboarding-desktop.png` and `mandatory-onboarding-mobile.png`.

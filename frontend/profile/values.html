@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Values - SAMVED</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../api/roadmap-hub.css">
+</head>
+
+<body>
+
+    <div class="back-profile-container">
+
+    <a
+        href="profile.html"
+        class="back-profile-button">
+
+        ← Back to Profile
+
+    </a>
+
+</div>
+
+<!-- PORTAL -->
+
+<div class="portal-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="sidebar-logo">
+            <h1>SAMVED <span>Portal</span></h1>
+        </div>
+
+        <div class="student-box">
+
+            <div
+                class="student-avatar"
+                id="studentAvatar">
+                S
+            </div>
+
+            <div class="student-details">
+
+                <strong id="sidebarStudentName">
+                    Student
+                </strong>
+
+                <span>
+                    Student
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+            <a href="profile.html">
+                Profile
+            </a>
+
+            <a href="academic.html">
+                Academic Details
+            </a>
+
+            <a href="interests.html">
+                Interests
+            </a>
+
+            <a href="skills.html">
+                Skills
+            </a>
+
+            <a href="strengths.html">
+                Strengths
+            </a>
+
+            <a href="values.html" class="active">
+                Values
+            </a>
+
+            <a href="careergoal.html">
+                Career Goal
+            </a>
+
+            <a href="../assessment/assessment.html">
+                Assessment
+            </a>
+
+            <a href="../dashboard/index.html">Dashboard &amp; Career Journey</a>
+</nav>
+
+
+        <div class="sidebar-bottom">
+
+            <button
+                type="button"
+                class="sidebar-logout"
+                onclick="logout()">
+
+                Logout
+
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+
+    <main class="portal-main">
+
+        <header class="portal-header">
+
+            <h2 id="pageTitle">
+                Values
+            </h2>
+
+            <div class="header-student">
+
+                Student:
+                <strong id="headerStudentName">
+                    Student
+                </strong>
+
+            </div>
+
+        </header>
+
+
+        <div class="portal-content">
+
+
+<!-- STUDENT NAME -->
+
+
+
+<div class="profile-container">
+
+    <h1>SAMVED</h1>
+
+    <p class="profile-subtitle">
+        Discover Your Values
+    </p>
+
+
+    <!-- VALUE SELECTION -->
+
+    <div class="profile-card">
+
+        <h2>What matters to you?</h2>
+
+        <p>
+            Select the values that are important to you.
+        </p>
+
+
+        <div class="value-grid">
+
+            <label class="value-option">
+                <input type="checkbox" name="value" value="Responsibility">
+                <span class="value-name">Responsibility</span>
+            </label>
+
+
+            <label class="value-option">
+                <input type="checkbox" name="value" value="Continuous Learning">
+                <span class="value-name">Continuous Learning</span>
+            </label>
+
+
+            <label class="value-option">
+                <input type="checkbox" name="value" value="Social Contribution">
+                <span class="value-name">Social Contribution</span>
+            </label>
+
+
+            <label class="value-option">
+                <input type="checkbox" name="value" value="Creativity">
+                <span class="value-name">Creativity</span>
+            </label>
+
+
+            <label class="value-option">
+                <input type="checkbox" name="value" value="Stability">
+                <span class="value-name">Stability</span>
+            </label>
+
+
+            <label class="value-option">
+                <input type="checkbox" name="value" value="Helping Others">
+                <span class="value-name">Helping Others</span>
+            </label>
+
+
+            <label class="value-option">
+                <input type="checkbox" name="value" value="Knowledge">
+                <span class="value-name">Knowledge</span>
+            </label>
+
+
+            <label class="value-option">
+                <input type="checkbox" name="value" value="Leadership">
+                <span class="value-name">Leadership</span>
+            </label>
+
+
+            <label class="value-option">
+                <input type="checkbox" name="value" value="Honesty">
+                <span class="value-name">Honesty</span>
+            </label>
+
+
+            <label class="value-option">
+                <input type="checkbox" name="value" value="Independence">
+                <span class="value-name">Independence</span>
+            </label>
+
+
+            <label class="value-option">
+                <input type="checkbox" name="value" value="Growth">
+                <span class="value-name">Growth</span>
+            </label>
+
+
+            <label class="value-option">
+                <input type="checkbox" name="value" value="Teamwork">
+                <span class="value-name">Teamwork</span>
+            </label>
+
+
+            <label class="value-option">
+                <input type="checkbox" name="value" value="Innovation">
+                <span class="value-name">Innovation</span>
+            </label>
+
+
+            <label class="value-option">
+                <input type="checkbox" name="value" value="Achievement">
+                <span class="value-name">Achievement</span>
+            </label>
+
+        </div>
+
+
+        <br>
+
+        <button
+            type="button"
+            onclick="saveValues()">
+            Save Values
+        </button>
+
+        <p id="valueMessage"></p>
+
+    </div>
+
+
+    <!-- SELECTED VALUES -->
+
+    <div class="profile-card">
+
+        <h2>My Selected Values</h2>
+
+        <div id="valuesList">
+
+            <p>No values selected yet.</p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+<script src="../api/developer-a-api.js"></script>
+<script src="../api/session.js"></script>
+<script src="profile-sections.js"></script>
+<script src="survey-navigation.js"></script>
+</body>
+
+</html>

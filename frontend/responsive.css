@@ -1,0 +1,73 @@
+/* Shared layout fixes for the career-journey pages. */
+@media (max-width: 760px) {
+  body {
+    display: block;
+  }
+
+  .sidebar {
+    width: 100%;
+    min-height: 0;
+  }
+
+  .brand, .user-badge {
+    padding: 12px 16px;
+  }
+
+  .nav-menu {
+    display: flex;
+    gap: 2px;
+    overflow-x: auto;
+    padding: 4px 8px;
+    flex-grow: 0;
+  }
+
+  .nav-menu li {
+    flex: 0 0 auto;
+  }
+
+  .nav-menu li a {
+    padding: 10px 12px;
+    white-space: nowrap;
+  }
+
+  .main-wrapper {
+    width: 100%;
+    min-width: 0;
+    overflow-x: visible;
+  }
+
+  .top-bar {
+    padding: 16px;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .m1-sync-bar {
+    padding: 16px;
+    gap: 12px;
+  }
+
+  .m1-sync-bar > div, .m1-sync-bar input, .m1-sync-bar select {
+    max-width: 100%;
+  }
+
+  .dashboard-container {
+    padding: 16px;
+  }
+
+  .dash-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .card, .roadmap-wrapper, .next-step-card {
+    min-width: 0;
+  }
+
+  .roadmap-wrapper {
+    overflow-x: auto;
+  }
+
+  .opp-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

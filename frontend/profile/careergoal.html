@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Career Goal - SAMVED</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+
+<link rel="stylesheet" href="../api/roadmap-hub.css">
+</head>
+
+<body>
+
+   <!-- PORTAL -->
+
+<div class="portal-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="sidebar-logo">
+            <h1>SAMVED <span>Portal</span></h1>
+        </div>
+
+        <div class="student-box">
+
+            <div
+                class="student-avatar"
+                id="studentAvatar">
+                S
+            </div>
+
+            <div class="student-details">
+
+                <strong id="sidebarStudentName">
+                    Student
+                </strong>
+
+                <span>
+                    Student
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+            <a href="profile.html">
+                Profile
+            </a>
+
+            <a href="academic.html">
+                Academic Details
+            </a>
+
+            <a href="interests.html">
+                Interests
+            </a>
+
+            <a href="skills.html">
+                Skills
+            </a>
+
+            <a href="strengths.html">
+                Strengths
+            </a>
+
+            <a href="values.html">
+                Values
+            </a>
+
+            <a href="careergoal.html" class="active">
+
+                Career Goal
+            </a>
+
+            <a href="../assessment/assessment.html">
+                Assessment
+            </a>
+
+            <a href="../dashboard/index.html">Dashboard &amp; Career Journey</a>
+</nav>
+
+
+        <div class="sidebar-bottom">
+
+            <button
+                type="button"
+                class="sidebar-logout"
+                onclick="logout()">
+
+                Logout
+
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+
+    <main class="portal-main">
+
+        <header class="portal-header">
+
+            <h2 id="pageTitle">
+                Career Goal
+            </h2>
+
+            <div class="header-student">
+
+                Student:
+                <strong id="headerStudentName">
+                    Student
+                </strong>
+
+            </div>
+
+        </header>
+
+
+
+<!-- STUDENT NAME -->
+
+
+
+<div class="profile-container">
+
+    <h1>SAMVED</h1>
+
+    <p class="profile-subtitle">
+        Discover Your Career Goal
+    </p>
+
+
+    <div class="profile-card">
+
+        <h2>What do you want to become?</h2>
+
+        <p>
+            Choose a career you are interested in.
+        </p>
+
+
+        <div class="career-grid">
+
+            <label class="career-option">
+                <input type="radio" name="careerGoal"
+                       value="Scientist"
+                       onclick="hideCustomCareer()">
+                <span class="career-name">Scientist</span>
+            </label>
+
+            <label class="career-option">
+                <input type="radio" name="careerGoal"
+                       value="Software Engineer"
+                       onclick="hideCustomCareer()">
+                <span class="career-name">Software Engineer</span>
+            </label>
+
+            <label class="career-option">
+                <input type="radio" name="careerGoal"
+                       value="Doctor"
+                       onclick="hideCustomCareer()">
+                <span class="career-name">Doctor</span>
+            </label>
+
+            <label class="career-option">
+                <input type="radio" name="careerGoal"
+                       value="Researcher"
+                       onclick="hideCustomCareer()">
+                <span class="career-name">Researcher</span>
+            </label>
+
+            <label class="career-option">
+                <input type="radio" name="careerGoal"
+                       value="Entrepreneur"
+                       onclick="hideCustomCareer()">
+                <span class="career-name">Entrepreneur</span>
+            </label>
+
+            <label class="career-option">
+                <input type="radio" name="careerGoal"
+                       value="Teacher"
+                       onclick="hideCustomCareer()">
+                <span class="career-name">Teacher</span>
+            </label>
+
+            <label class="career-option">
+                <input type="radio" name="careerGoal"
+                       value="Designer"
+                       onclick="hideCustomCareer()">
+                <span class="career-name">Designer</span>
+            </label>
+
+            <label class="career-option">
+                <input type="radio" name="careerGoal"
+                       value="Government Service"
+                       onclick="hideCustomCareer()">
+                <span class="career-name">Government Service</span>
+            </label>
+
+            <label class="career-option">
+                <input type="radio" name="careerGoal"
+                       value="Data Scientist"
+                       onclick="hideCustomCareer()">
+                <span class="career-name">Data Scientist</span>
+            </label>
+
+            <label class="career-option">
+                <input type="radio" name="careerGoal"
+                       value="AI / ML Engineer"
+                       onclick="hideCustomCareer()">
+                <span class="career-name">AI / ML Engineer</span>
+            </label>
+
+            <label class="career-option">
+                <input type="radio" name="careerGoal"
+                       value="Cybersecurity Specialist"
+                       onclick="hideCustomCareer()">
+                <span class="career-name">Cybersecurity Specialist</span>
+            </label>
+
+            <label class="career-option">
+                <input type="radio" name="careerGoal"
+                       value="Civil Engineer"
+                       onclick="hideCustomCareer()">
+                <span class="career-name">Civil Engineer</span>
+            </label>
+
+            <label class="career-option">
+                <input type="radio" name="careerGoal"
+                       value="Mechanical Engineer"
+                       onclick="hideCustomCareer()">
+                <span class="career-name">Mechanical Engineer</span>
+            </label>
+
+            <label class="career-option">
+                <input type="radio" name="careerGoal"
+                       value="Electrical Engineer"
+                       onclick="hideCustomCareer()">
+                <span class="career-name">Electrical Engineer</span>
+            </label>
+
+            <label class="career-option">
+                <input type="radio" name="careerGoal"
+                       value="Business / Management"
+                       onclick="hideCustomCareer()">
+                <span class="career-name">Business / Management</span>
+            </label>
+
+            <label class="career-option">
+                <input type="radio" name="careerGoal"
+                       value="Lawyer"
+                       onclick="hideCustomCareer()">
+                <span class="career-name">Lawyer</span>
+            </label>
+
+            <label class="career-option">
+                <input type="radio" name="careerGoal"
+                       value="Psychologist"
+                       onclick="hideCustomCareer()">
+                <span class="career-name">Psychologist</span>
+            </label>
+
+            <label class="career-option">
+                <input type="radio" name="careerGoal"
+                       value="Content Creator"
+                       onclick="hideCustomCareer()">
+                <span class="career-name">Content Creator</span>
+            </label>
+
+            <label class="career-option">
+                <input type="radio" name="careerGoal"
+                       value="Other"
+                       onclick="showCustomCareer()">
+                <span class="career-name">Other / Not Listed</span>
+            </label>
+
+        </div>
+
+
+        <!-- CUSTOM CAREER -->
+
+        <div
+            id="customCareerBox"
+            class="custom-career-box">
+
+            <label for="customCareer">
+                Tell us what career you are considering
+            </label>
+
+            <input
+                type="text"
+                id="customCareer"
+                placeholder="Example: Marine Biologist, Pilot, Game Developer..."
+            >
+
+        </div>
+
+
+        <br>
+
+        <button
+            type="button"
+            onclick="saveCareerGoal()">
+            Save Career Goal
+        </button>
+
+        <label><input type="radio" name="careerGoal" value="I am not sure yet" onclick="hideCustomCareer()"> I am not sure yet — explore careers</label><p id="careerMessage"></p>
+
+    </div>
+
+
+    <!-- SAVED CAREER -->
+
+    <div class="profile-card">
+
+        <h2>My Career Goal</h2>
+
+        <div id="careerList">
+            <p>No career goal selected yet.</p>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+<script src="../api/developer-a-api.js"></script>
+<script src="../api/session.js"></script>
+<script src="profile-sections.js"></script>
+<script src="survey-navigation.js"></script>
+</body>
+</html>

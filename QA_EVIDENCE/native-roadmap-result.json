@@ -1,0 +1,17 @@
+{
+  "database": "MySQL",
+  "source": "roadmap.sh via Parse",
+  "frontendTopics": 120,
+  "checks": [
+    "source diagram replaces generic cards",
+    "topic explanations inside SAMVED",
+    "roadmap.sh guide inside SAMVED",
+    "topic search",
+    "backend roadmap switching",
+    "career roadmap view",
+    "local dedicated viewer",
+    "mobile layout"
+  ],
+  "pageErrors": [],
+  "checkedAt": "2026-10-15T06:57:53.530Z"
+}

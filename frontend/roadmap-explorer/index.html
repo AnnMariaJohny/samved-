@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Explore learning roadmaps | SAMVED</title>
+  <style>
+    :root { color-scheme: light; font-family: system-ui, sans-serif; background: #f5f7fb; color: #183047; }
+    body { margin: 0; }
+    header { background: #112943; color: white; padding: 20px max(20px, calc((100vw - 960px) / 2)); }
+    header a { color: #ffda80; }
+    main { max-width: 960px; padding: 24px 20px 56px; margin: auto; }
+    h1 { margin-bottom: 8px; }
+    form { display: flex; gap: 10px; flex-wrap: wrap; margin: 28px 0 10px; }
+    input { flex: 1 1 250px; min-height: 42px; padding: 0 12px; border: 1px solid #9aacbe; border-radius: 6px; font: inherit; }
+    button { min-height: 44px; padding: 0 16px; border: 0; border-radius: 6px; background: #174d72; color: white; font: inherit; cursor: pointer; }
+    button:hover, button:focus-visible { background: #0d3755; }
+    #browse-all { background: #e3eaf0; color: #183047; }
+    #status { min-height: 24px; }
+    #results { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-top: 20px; }
+    article { background: white; border: 1px solid #d9e1e9; border-radius: 9px; padding: 18px; }
+    article h2 { font-size: 1.15rem; margin: 0 0 8px; }
+    article p { line-height: 1.5; }
+    article a { color: #0b597f; font-weight: 600; }
+    .note { color: #44576a; }
+  </style>
+<link rel="stylesheet" href="../api/roadmap-viewer.css">
+</head>
+<body>
+  <header><strong>SAMVED</strong> &nbsp; <a href="../auth/login.html">Student login</a></header>
+  <main>
+    <h1>Find a learning roadmap</h1>
+    <p class="note">For students and working professionals. Enter a career goal or topic such as “software engineer”, “data analyst”, or “Python”. SAMVED shows related roadmap.sh paths. If there is no exact path for a job title, it also creates a clearly labelled AI starter plan.</p>
+    <form id="discovery-form">
+      <label for="query">Topic or career goal</label>
+      <input id="query" name="query" maxlength="160" required autocomplete="off" placeholder="e.g. data analyst">
+      <button type="submit">Find roadmaps</button>
+      <button id="browse-all" type="button">Browse all</button>
+    </form>
+    <p class="note">Sign in to explore the full roadmap and topic explanations inside SAMVED. A match is a learning suggestion, not a prediction of career success.</p>
+    <p id="status" role="status" aria-live="polite"></p>
+    <section id="custom-plan" aria-label="Custom learning roadmap"></section>
+    <section id="results" aria-label="Roadmap results"></section>
+  </main>
+  <script src="../api/developer-a-api.js"></script>
+<script src="../api/roadmap-viewer.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
