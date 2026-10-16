@@ -1,0 +1,8 @@
+{
+  "publicDocs": true,
+  "contextFeature": "auth",
+  "clipboardPath": "backend/src/main/java/io/samved/config/WebSecurity.java:14",
+  "studentApiStatus": 401,
+  "originalPagePreserved": true,
+  "verdict": "PASS"
+}

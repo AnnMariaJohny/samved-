@@ -44,4 +44,13 @@ class WebBoundaryTest {
             .andExpect(status().isUnauthorized());
         browser.perform(get("/api/v1/roadmaps/me")).andExpect(status().isUnauthorized());
     }
+
+    @Test void backendArchitectureIsPublicDocumentationAndPrivateApisStayProtected() throws Exception {
+        browser.perform(get("/backend-visualization/index.html")).andExpect(status().isOk())
+            .andExpect(org.springframework.test.web.servlet.result.MockMvcResultMatchers.content().string(org.hamcrest.Matchers.containsString("Backend Visualizer")));
+        browser.perform(get("/backend-visualization/map-data.js")).andExpect(status().isOk());
+        browser.perform(get("/bv-entry.js")).andExpect(status().isOk());
+        browser.perform(get("/api/v1/students/me")).andExpect(status().isUnauthorized());
+        browser.perform(get("/api/v1/tasks")).andExpect(status().isUnauthorized());
+    }
 }

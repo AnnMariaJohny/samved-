@@ -20,6 +20,8 @@ public class OnboardingAccess implements WebMvcConfigurer {
         registry.addInterceptor(new HandlerInterceptor() {
             @Override public boolean preHandle(HttpServletRequest request,HttpServletResponse response,Object handler) throws Exception {
                 String path=org.springframework.web.util.UrlPathHelper.defaultInstance.getPathWithinApplication(request);
+                // Public architecture documentation contains no account data or executable feature APIs.
+                if(path.equals("/backend-visualization/index.html")||path.equals("/backend-visualization/"))return true;
                 boolean api=path.startsWith("/api/v1/");
                 boolean setup=path.equals("/api/v1/students/me")||path.startsWith("/api/v1/students/me/")
                     ||path.startsWith("/api/v1/auth/")||path.startsWith("/api/v1/assessments/");

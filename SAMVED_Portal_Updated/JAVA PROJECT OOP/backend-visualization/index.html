@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SAMVED — Backend Visualizer</title>
+<link rel="stylesheet" href="/portal-pages.css"><link rel="stylesheet" href="/backend-visualization/explorer.css">
+<script defer src="/backend-visualization/map-data.js"></script><script defer src="/backend-visualization/explorer.js"></script>
+</head>
+<body>
+<a href="#feature-detail" class="skip-link">Skip to feature details</a>
+<div class="explorer-shell">
+<header class="explorer-header">
+  <a href="/welcome.html" class="explorer-brand"><span class="brand-symbol">✦</span><span>SAMVED <b>Portal</b><small>Behind the experience</small></span></a>
+  <span class="explorer-label"><span class="status-dot"></span> BACKEND VISUALIZER</span>
+  <a href="/login.html" id="return-link" class="quiet-button">← Return to portal</a>
+</header>
+<section class="explorer-intro">
+  <div><p class="eyebrow">FROM A STUDENT’S ANSWER TO THEIR NEXT STEP</p><h1>A little curiosity.<br>A whole system behind it.</h1><p class="intro-copy">Explore how SAMVED turns onboarding into career guidance, a daily plan and visible progress. Select a feature to follow the data all the way to the code.</p></div>
+  <div class="architecture-summary"><span class="summary-orbit">✦</span><div><strong id="feature-count">17</strong><span>connected features</span></div><div><strong id="source-count">—</strong><span>verified code locations</span></div><p>Java 17 · Spring Boot · MySQL<br>NVIDIA NIM · Parse · Opportunity feeds</p></div>
+</section>
+<section class="walkthrough" aria-label="Illustrated data-flow walkthrough">
+  <div class="walkthrough-toolbar"><label for="trace-select">Follow a flow</label><select id="trace-select"></select><div class="trace-controls"><button id="previous-step" class="quiet-button" aria-label="Previous flow step">←</button><button id="play-flow" class="primary-button" aria-pressed="false">Play walkthrough</button><button id="next-step" class="quiet-button" aria-label="Next flow step">→</button></div></div>
+  <div class="trace-story"><span id="trace-counter" class="step-count"></span><p id="trace-caption" aria-live="polite"></p><span class="illustration-label">ILLUSTRATED FLOW · NO LIVE REQUESTS</span></div>
+  <div id="trace-track" class="trace-track" aria-label="Walkthrough steps"></div>
+</section>
+<main class="explorer-workspace">
+  <section class="map-panel" aria-label="Interactive backend architecture">
+    <div class="panel-heading"><div><p class="eyebrow">THE BIG PICTURE</p><h2>Every feature has a story.</h2></div><span class="map-hint">Click a node ↗</span></div>
+    <div id="architecture-map" class="architecture-map"><svg id="map-connections" aria-hidden="true"></svg><div id="map-lanes"></div></div>
+    <div class="map-legend"><span><i class="legend-active"></i> Selected feature</span><span><i class="legend-connection"></i> Data / dependency connection</span></div>
+    <p class="snapshot-note" id="snapshot-note"></p>
+  </section>
+  <aside id="feature-detail" class="feature-detail" tabindex="-1" aria-label="Selected feature implementation"></aside>
+</main>
+<footer class="explorer-footer"><span>Built to explain the implementation, not simulate backend activity.</span><a href="https://github.com/AnnMariaJohny/samved-" target="_blank" rel="noopener noreferrer">Explore the repository ↗</a></footer>
+</div>
+</body></html>

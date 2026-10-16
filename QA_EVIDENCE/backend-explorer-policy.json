@@ -1,0 +1,21 @@
+{
+  "planning": "compact",
+  "context_depth": "dependency",
+  "verification_depth": "impact",
+  "delegation": "none",
+  "allowed_write_scope": [
+    "SAMVED_Portal_Updated",
+    "backend/src/main/java/io/samved/config/OnboardingAccess.java",
+    "backend/src/test/java/io/samved/WebBoundaryTest.java",
+    "QA_EVIDENCE",
+    ".tools/publish-repo"
+  ],
+  "criteria": [
+    "BV entry on every active and public screen",
+    "Interactive complete backend flow with expandable feature details",
+    "Verified source filenames, method names, line numbers and excerpts",
+    "Works before login without private API access",
+    "Accessible responsive presentation controls and reduced motion",
+    "Browser and backend boundary verification, rebuild and push"
+  ]
+}
