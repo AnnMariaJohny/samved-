@@ -53,7 +53,11 @@ public class AssessmentService {
 
     @Transactional(readOnly = true)
     public Result result() {
-        long studentId = studentContext.requireStudentId();
+        return resultForStudent(studentContext.requireStudentId());
+    }
+
+    @Transactional(readOnly = true)
+    public Result resultForStudent(long studentId) {
         List<Answer> answers = savedAnswers(studentId);
         if (answers.isEmpty()) {
             throw ApiException.notFound("Complete the assessment before requesting a result.");

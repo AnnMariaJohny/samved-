@@ -1,0 +1,22 @@
+{
+  "checks": [
+    "real provider generated the research plan",
+    "seven real dated assignments persist",
+    "refresh does not create duplicates",
+    "AI returns bounded career match percentages",
+    "dashboard explains career match",
+    "dashboard includes charts and schedule",
+    "completion updates actual progress",
+    "daily%20tasks shows same persisted assignment",
+    "planner shows same persisted assignment",
+    "deadline%20system shows same persisted assignment",
+    "mobile dashboard fits",
+    "no browser errors"
+  ],
+  "sources": {
+    "plan": "AI",
+    "career": "AI"
+  },
+  "errors": [],
+  "disposableAccountDeleted": true
+}

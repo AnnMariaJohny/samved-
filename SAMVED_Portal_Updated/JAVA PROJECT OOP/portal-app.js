@@ -191,24 +191,55 @@
     const list=await request('GET','notifications');if(!list.length){empty(parent,'No due-date reminders yet. Add a due date to a task.');return;}
     for(const n of list){const row=node('div',null,'portal-assess-item');row.append(node('p',n.message));if(!n.readAt)btn(row,'Mark read',async b=>{await request('PATCH','notifications/'+n.id+'/read');b.remove();});parent.append(row);}
   }
+  async function ensurePlan(parent) {
+    const loading=node('p','Preparing your personalised daily plan…','portal-plan-loading');loading.setAttribute('role','status');parent.append(loading);
+    try{return await request('POST','action-plan/ensure');}
+    catch(error){const notice=block(parent,'Your daily plan needs a retry');empty(notice,error.message);btn(notice,'Prepare my plan',async()=>{parent.replaceChildren();if(page==='dashboard')await dashboard(parent);else if(['charts','progress tracker'].includes(page))await progress(parent);else await tasks(parent,page!=='daily tasks');},true);return null;}
+    finally{loading.remove();}
+  }
+  function planSummary(parent,plan) {
+    const section=block(parent);section.classList.add('portal-plan-summary');
+    section.append(node('span',plan.source==='AI'?'AI-PERSONALISED PLAN':'GUIDED STARTER PLAN · AI UNAVAILABLE','portal-live-eyebrow'),node('h2','Your week toward '+plan.goal,'portal-form-section-title'),node('p',plan.summary,'portal-info-card-text'),node('p','One manageable activity each day · Scheduled through '+plan.throughDate+' · Dates use India time','portal-info-card-text'));
+  }
+  function progressChart(parent,data,tasks,today) {
+    const grid=node('div',null,'portal-progress-grid'),ring=node('div',null,'portal-progress-ring');
+    const value=Math.min(100,Math.max(0,data.percent||0));ring.style.setProperty('--progress',value+'%');ring.setAttribute('role','img');ring.setAttribute('aria-label',value+' percent of tasks and milestones complete');ring.append(node('strong',value+'%'),node('span','Complete'));
+    const detail=node('div');detail.append(node('h3','Small steps, visible progress'),node('p',`${data.completedTasks||0} of ${data.totalTasks||0} tasks complete · ${data.completedMilestones||0} of ${data.totalMilestones||0} milestones complete`,'portal-info-card-text'));
+    const chart=node('div',null,'portal-week-chart');chart.setAttribute('role','img');chart.setAttribute('aria-label','Completed activities by scheduled date for this week');
+    for(let i=0;i<7;i++){const date=new Date(today+'T12:00:00Z');date.setUTCDate(date.getUTCDate()+i);const key=date.toISOString().slice(0,10),all=tasks.filter(t=>t.dueDate===key),done=all.filter(t=>t.status==='COMPLETED').length;const col=node('div',null,'portal-week-column'),bar=node('div',null,'portal-week-bar'),fill=node('span');fill.style.height=(all.length?done/all.length*100:0)+'%';bar.append(fill);col.title=key+': '+done+' / '+all.length+' activities complete';col.append(node('span',done+'/'+all.length),bar,node('small',date.toLocaleDateString(undefined,{weekday:'short',timeZone:'UTC'})));chart.append(col);}
+    detail.append(chart);grid.append(ring,detail);parent.append(grid);link(parent,'Open full progress & charts →','/charts/index.html','portal-info-card-link');
+  }
   async function tasks(parent,dated=false) {
+    const plan=await ensurePlan(parent);if(plan)planSummary(parent,plan);
     const {f,submit}=form(block(parent,dated?'Plan a task':'Add a task'),'Save Task',async form=>{const d=values(form);const payload={title:d.title.trim(),description:d.description.trim()||null,dueDate:d.dueDate||null};await request(editId?'PUT':'POST',editId?'tasks/'+editId:'tasks',payload);editId=null;form.reset();await draw();});
     let editId=null;
     const title=field(f,'Task title','title');title.required=true;title.maxLength=160;
-    const description=field(f,'Description (optional)','description');description.maxLength=2000;
+    const description=field(f,'Description (optional)','description');description.maxLength=1000;
     field(f,'Due date (optional)','dueDate','date');f.append(submit);btn(f,'Cancel',()=>{editId=null;f.reset();});
     const list=block(parent,dated?'Scheduled tasks':'My tasks');
-    async function draw(){const items=await request('GET','tasks');list.querySelectorAll('article,p').forEach(n=>n.remove());const visible=dated?items.filter(t=>t.dueDate).sort((a,b)=>a.dueDate.localeCompare(b.dueDate)):items;if(!visible.length)empty(list,'No tasks saved here yet.');for(const t of visible){const row=node('article',null,'portal-assess-item portal-live-record');row.append(node('h3',t.title),node('p',t.description||''),node('p',`${t.status}${t.dueDate?' · '+t.dueDate:''}`));const actions=node('div',null,'portal-live-actions');row.append(actions);btn(actions,t.status==='COMPLETED'?'Reopen':'Complete',async()=>{await request('PATCH','tasks/'+t.id+'/status',{status:t.status==='COMPLETED'?'PENDING':'COMPLETED'});await draw();});btn(actions,'Edit',()=>{editId=t.id;title.value=t.title;description.value=t.description||'';el('dueDate').value=t.dueDate||'';f.scrollIntoView({behavior:'smooth'});});btn(actions,'Delete',async()=>{await request('DELETE','tasks/'+t.id);await draw();});list.append(row);}}await draw();
+    parent.insertBefore(list,f.parentElement);
+    async function draw(){const items=await request('GET','tasks');list.querySelectorAll('article,p').forEach(n=>n.remove());const visible=(dated?items.filter(t=>t.dueDate):items).sort((a,b)=>(a.dueDate||'9999').localeCompare(b.dueDate||'9999'));if(!visible.length)empty(list,'No tasks saved here yet.');for(const t of visible){const row=node('article',null,'portal-assess-item portal-live-record');row.append(node('h3',t.title),node('p',t.description||''),node('p',`${t.status}${t.dueDate?' · Due '+t.dueDate:''}${t.automaticallyAssigned?' · Assigned from your onboarding':''}`));const actions=node('div',null,'portal-live-actions');row.append(actions);btn(actions,t.status==='COMPLETED'?'Reopen':'Complete',async()=>{await request('PATCH','tasks/'+t.id+'/status',{status:t.status==='COMPLETED'?'PENDING':'COMPLETED'});await draw();});btn(actions,'Edit',()=>{editId=t.id;title.value=t.title;description.value=t.description||'';el('dueDate').value=t.dueDate||'';f.scrollIntoView({behavior:'smooth'});});btn(actions,'Delete',async()=>{await request('DELETE','tasks/'+t.id);await draw();});list.append(row);}}await draw();
     if(dated)await reminders(block(parent,'Reminders'));
   }
   async function dashboard(parent) {
     const hero=block(parent);hero.classList.add('portal-live-hero');hero.append(node('span','STUDENT DASHBOARD','portal-live-eyebrow'),node('h1','Welcome back, '+account.name+'! ♡'),node('p','Your journey toward '+(account.careerGoal.text||'discovering your next step')+'.'));
-    const p=await request('GET','progress/me'), list=await request('GET','tasks'), notes=await request('GET','notifications');
+    const plan=await ensurePlan(parent);if(plan)planSummary(parent,plan);
+    const [p,list,notes]=await Promise.all([request('GET','progress/me'),request('GET','tasks'),request('GET','notifications')]);
     const stats=node('div',null,'portal-stats-row');parent.append(stats);
     for(const [label,value] of [['Journey progress',p.percent+'%'],['Tasks completed',p.completedTasks+' / '+p.totalTasks],['Open deadlines',list.filter(t=>t.dueDate&&t.status!=='COMPLETED').length],['Unread reminders',notes.filter(n=>!n.readAt).length]]){const c=node('div',null,'portal-stat-card');c.append(node('div',label,'portal-stat-label'),node('strong',value,'portal-stat-value'));stats.append(c);}
-    const quick=block(parent,'Explore Your Portal'),grid=node('div',null,'portal-live-grid');quick.append(grid);
-    for(const [title,description,path] of [['Academic Details','Manage your academic journey.','academic-details'],['Career Roadmap','Explore and save a learning path.','career roadmap'],['Skills & Strengths','Build your skills profile.','skills'],['Activities','Find verified opportunities.','activities'],['Assessment','Understand your career interests.','form assessment'],['Planner','Organize your upcoming tasks.','planner']]){const c=link(grid,'','/'+encodeURIComponent(path)+'/index.html','portal-act-card');c.append(node('h3',title,'portal-act-title'),node('p',description,'portal-act-desc'),node('span','Explore →','portal-info-card-link'));}
-    await reminders(block(parent,'Reminders'));
+    const today=plan?.today||new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Kolkata',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
+    const daily=block(parent,'Your next actions'),dailyList=node('div',null,'portal-match-list');daily.append(dailyList);
+    const current=list.filter(t=>t.status!=='COMPLETED'&&t.dueDate&&t.dueDate<=today).sort((a,b)=>a.dueDate.localeCompare(b.dueDate)).slice(0,3);
+    if(!current.length)empty(dailyList,'You’re up to date for today. Your next activity is scheduled in the planner.');
+    for(const task of current){const card=node('article',null,'portal-act-card');card.append(node('span',task.dueDate<today?'CARRY FORWARD · '+task.dueDate:'TODAY · '+task.dueDate,'portal-live-eyebrow'),node('h3',task.title,'portal-act-title'),node('p',task.description||'','portal-act-desc'));btn(card,'Mark complete',async()=>{await request('PATCH','tasks/'+task.id+'/status',{status:'COMPLETED'});parent.replaceChildren();await dashboard(parent);},true);dailyList.append(card);}
+    link(daily,'All daily tasks →','/daily%20tasks/index.html','portal-info-card-link');
+    progressChart(block(parent,'Your progress'),p,list,today);
+    const schedule=block(parent,'Your upcoming week'),rows=node('div',null,'portal-match-list');schedule.append(rows);
+    const upcoming=list.filter(t=>t.dueDate&&t.dueDate>=today).sort((a,b)=>a.dueDate.localeCompare(b.dueDate)).slice(0,7);
+    for(const task of upcoming){const row=node('article',null,'portal-schedule-row');row.append(node('time',task.dueDate),node('strong',task.title),node('span',task.status.replaceAll('_',' '),'portal-pill-tag purple'));rows.append(row);}
+    if(!upcoming.length)empty(rows,'No upcoming tasks. Your plan will refresh automatically after the current week.');
+    const links=node('div',null,'portal-live-actions');schedule.append(links);
+    for(const [title,path] of [['Open planner','planner'],['View deadlines','deadline system'],['Progress & charts','charts']])link(links,title,'/'+encodeURIComponent(path)+'/index.html','portal-btn portal-btn-secondary');
     await onboarding.dashboard(parent);
   }
   async function roadmaps(parent) {
@@ -228,7 +259,9 @@
     filter.addEventListener('change',()=>action(draw,null,'Listings updated.'));await draw();
   }
   async function progress(parent) {
+    await ensurePlan(parent);
     const data=await request('GET','progress/me');
+    const assigned=await request('GET','tasks');progressChart(block(parent,'Completion overview'),data,assigned,new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Kolkata'}).format(new Date()));
     function meter(label,percent){const section=block(parent,label);const track=node('div',null,'portal-live-track');const fill=node('div');fill.style.width=Math.min(100,Math.max(0,percent))+'%';track.append(fill);section.append(track,node('p',Math.round(percent)+'%'));}
     meter('Journey completion',data.percent);empty(parent,`${data.completedTasks} of ${data.totalTasks} tasks completed · ${data.completedMilestones} of ${data.totalMilestones} milestones completed.`);
     for(const skill of account.skills)meter(skill.name+' · '+skill.proficiency,{BEGINNER:33,INTERMEDIATE:66,ADVANCED:100}[skill.proficiency]);
@@ -236,7 +269,8 @@
   }
   async function recommendations(parent) {
     const data=await request('GET','recommendations/me');empty(parent,data.guidance||'Career guidance based on your profile.');
-    for(const r of data.recommendations||[]){const c=block(parent,r.careerTitle);empty(c,'Rule overlap: '+r.score+'/100 · '+data.source);empty(c,(r.reasons||[]).join(' · '));empty(c,'Skills to explore: '+(r.skillGaps||[]).join(', '));}
+    empty(parent,'Match estimates describe alignment with your onboarding answers, not your chance of getting hired.');
+    for(const r of data.recommendations||[]){const c=block(parent,r.careerTitle);c.append(node('p','Career match: '+(r.aiMatchPercent??r.score)+'% · '+(r.aiMatchPercent!=null?'AI estimate':'profile-based estimate'),'portal-match-percent'));empty(c,r.aiExplanation||(r.reasons||[]).join(' · '));empty(c,'Skills to explore: '+(r.skillGaps||[]).join(', '));}
     link(parent,'Explore roadmaps →','/career%20roadmap/index.html','portal-btn portal-btn-primary');
   }
   async function navigation() {

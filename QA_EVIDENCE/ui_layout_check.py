@@ -16,7 +16,7 @@ def main():
     fixture=Fixture()
     def handle(route):
         path=urlparse(route.request.url).path.removeprefix('/api/v1/')
-        if hold and path in ('recommendations/me','roadmaps/guidance','opportunities'):
+        if hold and path in ('recommendations/me','roadmaps/guidance','opportunities','action-plan/ensure'):
             held.append((route,path));return
         if path=='roadmaps/guidance':
             route.fulfill(json={'recommended':[{'title':title,'reasons':['Interest: Technology','Skill: Programming','Goal: Software Engineer','Assessment: technology']} for title in ['Frontend','Backend','Full Stack']],'saved':[],'message':'Learning options matched to your saved interests, skills, career direction and assessment.'})
@@ -47,8 +47,8 @@ def main():
         page.set_viewport_size({'width':1440,'height':1000})
         hold=True
         page.goto(BASE+'/onboarding/prepare.html')
-        page.wait_for_function("document.querySelectorAll('.preparation-pending').length===3")
-        check('all request indicators pending',len(held)==3)
+        page.wait_for_function("document.querySelectorAll('.preparation-pending').length===4")
+        check('all request indicators pending',len(held)==4)
         check('preparation ring animates',page.locator('.preparation-symbol').evaluate('e=>getComputedStyle(e,"::before").animationName')=='preparation-orbit')
         check('progress reflects zero settled requests',page.locator('progress').get_attribute('value')=='0')
         page.screenshot(path='QA_EVIDENCE/polished-preparation.png',full_page=True)
@@ -62,7 +62,8 @@ def main():
         page.wait_for_selector('.preparation-warning')
         check('failed request receives warning',page.locator('.preparation-warning[aria-busy=false]').count()==1)
         route,path=held.pop(0);route.fulfill(json={'content':[]})
-        page.wait_for_function("document.querySelector('progress').value===3")
+        route,path=held.pop(0);route.fulfill(json={'goal':'Research Scientist','source':'AI','summary':'A week of research practice','throughDate':'2026-10-22','today':'2026-10-16'})
+        page.wait_for_function("document.querySelector('progress').value===4")
         check('all requests settled and animation stopped',page.locator('.preparation-pending').count()==0 and page.locator('.preparation-finished').count()==1)
         hold=False
         page.wait_for_url('**/dashboard/index.html')

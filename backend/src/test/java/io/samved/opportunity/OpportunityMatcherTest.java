@@ -28,4 +28,11 @@ class OpportunityMatcherTest {
             "https://example.org/apply", "Example", "https://example.org/event",
             Instant.now(), null, null, null, "Online", null, true);
     }
+
+    @Test void researchGoalFindsRelatedListingsWithoutDoubleCountingCaseVariants() {
+        var student=new StudentSnapshot("undergraduate","CUSTOM","Research Scientist",List.of("Research"),List.of(),List.of(),List.of());
+        var match=OpportunityMatcher.match(listing("Research fellowship","Science opportunities"),student);
+        assertThat(match.score()).isEqualTo(6);
+        assertThat(match.matchedSignals()).contains("Research","science");
+    }
 }

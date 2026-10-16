@@ -26,6 +26,7 @@ public class LearningTask {
     private TaskStatus status;
     @Column(name = "created_at", nullable = false)
     private Instant createdAt;
+    @Column(name="auto_plan_key",length=64) private String autoPlanKey;
 
     protected LearningTask() {}
     public LearningTask(long studentId, Long roadmapId, Long milestoneId, String title,
@@ -48,7 +49,10 @@ public class LearningTask {
     public LocalDate getDueDate() { return dueDate; }
     public TaskStatus getStatus() { return status; }
     public Instant getCreatedAt() { return createdAt; }
+    public String getAutoPlanKey() { return autoPlanKey; }
+    public void setAutoPlanKey(String key) { autoPlanKey=key; }
     public void update(String title, String description, LocalDate dueDate) {
+        this.autoPlanKey = null; // A student-edited assignment is preserved on future replanning.
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;

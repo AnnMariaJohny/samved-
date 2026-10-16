@@ -46,6 +46,7 @@ class Fixture:
                     'activeSlug':self.active_slug,'message':'Browse a path to get started.'}
         result = []
         if path == 'auth/csrf': result = {'token':'test-token'}
+        elif path == 'action-plan/ensure': result = {'goal':self.profile.get('careerGoal',{}).get('text') or 'your interests','source':'GUIDED','summary':'Your onboarding-based weekly activities.','throughDate':'2026-10-22','today':'2026-10-16'}
         elif path == 'auth/me': result = self.profile
         elif path == 'auth/login': result = {'message':'Signed in'}
         elif path == 'auth/register': result = {'message':'Registered'}

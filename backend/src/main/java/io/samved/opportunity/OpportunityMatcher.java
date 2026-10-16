@@ -19,14 +19,20 @@ public final class OpportunityMatcher {
         add(signals, student.skills());
         // A custom goal can guide discovery; the enum-like goal type is too broad.
         if (student.goalText() != null) add(signals, List.of(student.goalText()));
+        String goal=student.goalText()==null?"":student.goalText().toLowerCase(Locale.ROOT);
+        if(goal.contains("research")||goal.contains("scientist"))add(signals,List.of("research","science","laboratory","statistics"));
+        if(goal.contains("software")||goal.contains("developer"))add(signals,List.of("software","programming","technology"));
+        if(goal.contains("design"))add(signals,List.of("design","creative"));
         String title = normalize(opportunity.getTitle());
         String description = normalize(opportunity.getSummary());
         String organizer = normalize(opportunity.getOrganizer());
         String type = normalize(opportunity.getType());
         int score = 0;
+        Set<String> seen=new java.util.HashSet<>();
         List<String> reasons = new ArrayList<>();
         for (String signal : signals.stream().limit(30).toList()) {
             String normalized = normalize(signal);
+            if(!seen.add(normalized))continue;
             if (normalized.length() < 3) continue;
             int weight = containsPhrase(title, normalized) ? 4
                 : containsPhrase(description, normalized) ? 2

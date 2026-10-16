@@ -64,6 +64,15 @@ class AiRecommendationServiceTest {
         assertThat(ai.recommend(student, Set.of(), rules).source()).isEqualTo("RULES");
     }
 
+    @Test void providerMatchEstimatesAreValidatedAndReturned() throws Exception {
+        HttpServer server=serve(200,providerText("{\"careerIds\":[\"software-engineer\"],\"matches\":[{\"careerId\":\"software-engineer\",\"percent\":84,\"explanation\":\"Your coding interest aligns with this role.\"}]}"),new AtomicReference<>());
+        try{var result=client(server,"test-key").recommend(student,Set.of(),rules);assertThat(result.recommendations().get(0).aiMatchPercent()).isEqualTo(84);assertThat(result.recommendations().get(0).score()).isEqualTo(50);}finally{server.stop(0);}
+    }
+    @Test void invalidMatchPercentageFallsBackInsteadOfDisplayingInventedScore() throws Exception {
+        HttpServer server=serve(200,providerText("{\"careerIds\":[\"software-engineer\"],\"matches\":[{\"careerId\":\"software-engineer\",\"percent\":184,\"explanation\":\"Test\"}]}"),new AtomicReference<>());
+        try{assertThat(client(server,"test-key").recommend(student,Set.of(),rules).source()).isEqualTo("RULES_FALLBACK");}finally{server.stop(0);}
+    }
+
     private AiRecommendationService client(HttpServer server, String key) {
         return new AiRecommendationService(key, "openai/gpt-oss-20b",
             java.net.URI.create("http://127.0.0.1:" + server.getAddress().getPort() + "/v1/chat/completions"),

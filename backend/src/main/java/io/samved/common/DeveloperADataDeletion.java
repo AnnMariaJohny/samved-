@@ -17,6 +17,7 @@ public class DeveloperADataDeletion {
         // Tasks reference milestones and roadmaps, so delete them first.
         database.update("DELETE FROM task_notifications WHERE student_id = ?", studentId);
         database.update("DELETE FROM learning_tasks WHERE student_id = ?", studentId);
+        database.update("DELETE FROM student_action_plans WHERE student_id = ?", studentId);
         database.update("DELETE FROM roadmap_milestones WHERE roadmap_id IN (SELECT id FROM roadmaps WHERE student_id = ?)", studentId);
         database.update("DELETE FROM roadmaps WHERE student_id = ?", studentId);
         database.update("DELETE FROM assessment_responses WHERE student_id = ?", studentId);

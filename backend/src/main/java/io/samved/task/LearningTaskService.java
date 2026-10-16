@@ -93,9 +93,9 @@ public class LearningTaskService {
     private String clean(String value) { return value == null || value.isBlank() ? null : value.trim(); }
     private TaskView view(LearningTask task) {
         return new TaskView(task.getId(), task.getRoadmapId(), task.getMilestoneId(), task.getTitle(),
-            task.getDescription(), task.getDueDate(), task.getStatus(), task.getCreatedAt());
+            task.getDescription(), task.getDueDate(), task.getStatus(), task.getCreatedAt(),task.getAutoPlanKey()!=null);
     }
     public record TaskInput(Long roadmapId, Long milestoneId, String title, String description, LocalDate dueDate) {}
     public record TaskView(long id, Long roadmapId, Long milestoneId, String title, String description,
-                           LocalDate dueDate, TaskStatus status, java.time.Instant createdAt) {}
+                           LocalDate dueDate, TaskStatus status, java.time.Instant createdAt,boolean automaticallyAssigned) {}
 }

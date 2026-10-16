@@ -1,0 +1,22 @@
+{
+  "planning": "deep",
+  "context_depth": "dependency",
+  "verification_depth": "impact",
+  "delegation": "none",
+  "allowed_write_scope": [
+    "backend",
+    "SAMVED_Portal_Updated",
+    "QA_EVIDENCE",
+    ".tools/publish-repo",
+    "ONBOARDING_FLOW.md"
+  ],
+  "criteria": [
+    "AI career-match estimate clearly labelled",
+    "Seven dated persisted personalized tasks generated automatically without duplicates",
+    "Daily tasks/planner/deadlines/dashboard share records",
+    "Dashboard progress charts update after completion",
+    "Top five existing opportunities ranked from onboarding",
+    "Provider fallback, ownership, profile-change and deletion verified",
+    "Rebuild running app and push to authorized repository"
+  ]
+}

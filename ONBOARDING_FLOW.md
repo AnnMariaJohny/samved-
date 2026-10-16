@@ -13,7 +13,7 @@ The active frontend remains `SAMVED_Portal_Updated/JAVA PROJECT OOP/`.
 7. Strengths: save at least one selection.
 8. Values: save at least one selection.
 9. Assessment: answer all eight current career questions and submit them together.
-10. `/onboarding/prepare.html` automatically requests career ranking/skill gaps, roadmap guidance, and matched opportunities, then opens `/dashboard/index.html`.
+10. `/onboarding/prepare.html` automatically requests career ranking/skill gaps, roadmap guidance, matched opportunities and a saved seven-day action plan, then opens `/dashboard/index.html`.
 
 The eight checklist sections are personal details, education, career direction, interests, skills, strengths, values, and assessment. The welcome and preparation screens are outside that count.
 
@@ -38,3 +38,15 @@ The dashboard is visibly labelled **Judge demo · sample student**. It contains 
 - `QA_EVIDENCE/onboarding_flow_check.py`: stateful browser checks for required order, saved-data validation, mobile layout, automatic preparation, and provider failure handling.
 - `QA_EVIDENCE/onboarding_live.py`: real Java/MySQL checks for the complete student journey, isolated judge demo, restoration of the original student's incomplete profile, actual AI source, and disposable-account cleanup.
 - Backend tests cover page/API gating, account security, and session-specific recommendation caching.
+# Automatic daily planning
+
+After completing onboarding, dashboard preparation calls `POST /api/v1/action-plan/ensure` with CSRF protection. The server uses education, academic courses/subjects, interests, skill proficiency, strengths, values, career direction and assessment themes to request seven actionable learning activities from NVIDIA NIM. Java assigns one activity per date in Asia/Kolkata and saves them as real tasks in MySQL.
+
+- Dashboard, Daily Tasks, Planner and Deadlines use the same task records. Completing an activity updates the dashboard's progress ring and weekly chart from persisted counts.
+- A student-specific database lock and profile fingerprint prevent duplicate assignments across refreshes or simultaneous tabs.
+- Changing onboarding inputs replans future pending automatic assignments. Completed, overdue, in-progress, manually created and student-edited tasks are retained.
+- A scheduled job renews expired weeks at 00:10 India time. Visiting the dashboard or task/progress pages also renews an expired plan, including after server downtime.
+- AI failures create a clearly labelled guided starter week. Existing saved plans are reused through their scheduled week; refreshing does not repeatedly call the provider.
+- Dashboard opportunities show up to five positive relevance matches from actual feeds. Research/science and other supported role keywords supplement the student's interests and skills. Missing matches are shown honestly; no listings are invented.
+- Career suggestions display `aiMatchPercent` and `aiExplanation` when supplied and validated by AI. These are exploratory preference-alignment estimates, not employment probabilities. The original Java `score` remains available separately; fallback percentages are explicitly labelled profile-based.
+- Deleting an account removes its automatic plan and assigned tasks.
