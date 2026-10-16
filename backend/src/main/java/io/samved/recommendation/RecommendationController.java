@@ -8,11 +8,15 @@ import io.samved.common.StudentProfilePort;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import jakarta.servlet.http.HttpSession;
+import io.samved.common.StudentSnapshot;
 
 /** Recommendations are always computed from the signed-in student's profile. */
 @RestController
 @RequestMapping("/api/v1/recommendations")
 public class RecommendationController {
+    private record Cached(long studentId, StudentSnapshot profile, java.util.Set<String> themes,
+                          long expiresAt, RecommendationResponse response) { }
     private final StudentContext studentContext;
     private final StudentProfilePort profiles;
     private final RecommendationService service;
@@ -32,7 +36,7 @@ public class RecommendationController {
     }
 
     @GetMapping("/me")
-    public RecommendationResponse mine() {
+    public RecommendationResponse mine(HttpSession session) {
         long studentId = studentContext.requireStudentId();
         java.util.Set<String> themes;
         try {
@@ -43,9 +47,16 @@ public class RecommendationController {
             themes = java.util.Set.of();
         }
         var student = profiles.snapshot(studentId);
+        Object cached=session.getAttribute("samvedCareerRecommendations");
+        if(cached instanceof Cached c && c.studentId()==studentId && c.expiresAt()>System.currentTimeMillis()
+            && c.profile().equals(student) && c.themes().equals(themes)) return c.response();
         var catalogue = careers.findAll();
         var rules = service.recommend(student, catalogue, themes);
-        return ai.recommend(student, themes, rules);
+        var result=ai.recommend(student, themes, rules);
+        long lifetime="AI".equals(result.source())?600_000:60_000;
+        session.setAttribute("samvedCareerRecommendations",new Cached(studentId,student,themes,
+            System.currentTimeMillis()+lifetime,result));
+        return result;
     }
 
 }

@@ -28,12 +28,16 @@
   <build>
     <resources>
       <resource><directory>src/main/resources</directory></resource>
-      <!-- Keep frontend/ editable; package it under Spring Boot's static/ location. -->
+      <!-- The updated portal is the only frontend source packaged into the app. -->
       <resource>
-        <directory>../frontend</directory>
+        <directory>../SAMVED_Portal_Updated/JAVA PROJECT OOP</directory>
         <targetPath>static</targetPath>
         <filtering>false</filtering>
-        <excludes><exclude>**/*.md</exclude></excludes>
+        <excludes>
+          <exclude>**/*.md</exclude><exclude>**/*.lnk</exclude><exclude>assets/references/**</exclude>
+          <exclude>**/script.js</exclude><exclude>profile.js</exclude>
+          <exclude>portal-nav.js</exclude><exclude>portal-logout.js</exclude>
+        </excludes>
       </resource>
     </resources>
     <plugins><plugin><groupId>org.springframework.boot</groupId><artifactId>spring-boot-maven-plugin</artifactId></plugin></plugins>

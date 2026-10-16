@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome - SAMVED Portal</title>
+  <link rel="stylesheet" href="portal-pages.css">
+  <style>
+    .auth-container {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .auth-card {
+      background: #ffffff;
+      border: 1.5px solid var(--portal-card-border);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--portal-card-shadow);
+      max-width: 920px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      overflow: hidden;
+    }
+    .auth-ill-panel {
+      background: linear-gradient(135deg, #f4f0ff 0%, #edf1fc 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 32px;
+      text-align: center;
+      position: relative;
+    }
+    .auth-ill-img {
+      max-width: 85%;
+      height: auto;
+      border-radius: var(--radius-lg);
+      box-shadow: 0 8px 24px rgba(118, 99, 235, 0.12);
+      margin-bottom: 16px;
+    }
+    .auth-content-panel {
+      padding: 44px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    @media (max-width: 768px) {
+      .auth-card { grid-template-columns: 1fr; }
+      .auth-ill-panel { display: none; }
+    }
+  </style>
+<link rel="stylesheet" href="/portal-live.css"/></head>
+<body>
+  <div class="auth-container">
+    <div class="auth-card">
+      <!-- Left Illustration Panel -->
+      <div class="auth-ill-panel">
+        <img src="assets/illustrations/WELCOME.jpeg" alt="Welcome to SAMVED" class="auth-ill-img">
+        <p style="font-family: var(--font-hand); font-size: 22px; color: #7663eb; margin: 0;">
+          Big dreams start here ♡ ✈
+        </p>
+        <p style="font-size: 12px; color: var(--portal-text-muted); max-width: 260px; margin-top: 6px;">
+          A student looking towards a bright future, surrounded by learning, growth and possibilities.
+        </p>
+      </div>
+
+      <!-- Right Form & Entry Panel -->
+      <div class="auth-content-panel">
+        <div style="margin-bottom: 24px;">
+          <span class="portal-brand-mark"><img alt="" src="/assets/samved-portal-logo.png?v=7d29b29b41"/></span><span class="portal-brand-name">SAMVED <span>Portal</span><small>Where your future finds its voice</small></span>
+          <p style="font-size: 13.5px; color: var(--portal-text-muted); margin: 4px 0 0;">
+            Where future finds its voice. Your all-in-one student learning, milestones, and career growth portal.
+          </p>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 14px; margin-bottom: 24px;">
+          <a href="dashboard/index.html" class="portal-btn portal-btn-primary" style="padding: 13px; font-size: 15px; width: 100%;">
+            Open My Dashboard →
+          </a>
+          <a href="login.html" class="portal-btn portal-btn-secondary" style="padding: 12px; font-size: 14px; width: 100%;">
+            Log In to Your Account
+          </a>
+          <a href="register.html" class="portal-btn portal-btn-secondary" style="padding: 12px; font-size: 14px; width: 100%; border-style: dashed;">
+            ✨ Create New Student Account
+          </a>
+        </div>
+
+        <div style="text-align: center; font-size: 11.5px; color: var(--portal-text-muted);">
+          Protected by SAMVED Student Privacy Policy • © 2026 SAMVED Portal
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,61 @@
+/* ==========================================================================
+   SAMVED Portal - Analytics & Charts Styles
+   Lavender / Pastel Aesthetic Design System
+   ========================================================================== */
+@import url('../portal-pages.css');
+
+.charts-grid-layout {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+@media (max-width: 900px) {
+  .charts-grid-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.chart-card-box {
+  background: #ffffff;
+  border: 1.5px solid #edf0f8;
+  border-radius: 18px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.2s ease;
+}
+
+.chart-card-box:hover {
+  transform: translateY(-2px);
+  border-color: #d8ddf4;
+  box-shadow: 0 8px 22px rgba(118, 99, 235, 0.08);
+}
+
+.chart-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.chart-card-title {
+  font-family: var(--font-heading, 'Plus Jakarta Sans', sans-serif);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--portal-text-dark, #232232);
+}
+
+.chart-canvas-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 10px;
+}
+
+.chart-canvas-wrap canvas {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+}

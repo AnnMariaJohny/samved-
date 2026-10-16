@@ -1,0 +1,81 @@
+/* ==========================================================================
+   SAMVED Portal - AI Recommendation Styles
+   Lavender / Pastel Aesthetic Design System
+   ========================================================================== */
+@import url('../portal-pages.css');
+
+.recommendations-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.recommendation-card {
+  background: #ffffff;
+  border: 1.5px solid #edf0f8;
+  border-radius: 20px;
+  padding: 24px;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.recommendation-card:hover {
+  transform: translateY(-2px);
+  border-color: #d8ddf4;
+  box-shadow: 0 10px 24px rgba(118, 99, 235, 0.08);
+}
+
+.recommendation-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.match-score-badge {
+  padding: 6px 14px;
+  border-radius: 99px;
+  background: #f0edfe;
+  color: #7663eb;
+  font-size: 12.5px;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+}
+
+.reasoning-box {
+  background: #fbfbfe;
+  border: 1px solid #edf0f8;
+  border-left: 4px solid #7663eb;
+  padding: 14px 16px;
+  border-radius: 12px;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--portal-text-dark, #232232);
+}
+
+.skill-match-tag {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 99px;
+  background: #e6f9f4;
+  color: #21b896;
+  font-size: 11.5px;
+  font-weight: 700;
+  margin-right: 6px;
+  margin-bottom: 6px;
+}
+
+.action-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  background: #f8f9fe;
+  border: 1.5px solid #edf0f8;
+  padding: 14px 18px;
+  border-radius: 14px;
+}

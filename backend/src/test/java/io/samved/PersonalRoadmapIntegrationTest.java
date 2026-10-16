@@ -67,10 +67,29 @@ class PersonalRoadmapIntegrationTest {
             web.perform(get(path).session(session)).andExpect(status().isForbidden()).andExpect(jsonPath("$.code").value("ONBOARDING_REQUIRED"));
         for(String path:List.of("/dashboard/index.html","/career%20roadmap/index.html","/roadmap-explorer/index.html"))
             web.perform(get(java.net.URI.create(path)).session(session)).andExpect(status().isFound()).andExpect(redirectedUrl("/profile/academic.html"));
-        web.perform(get("/profile/interests.html").session(session)).andExpect(status().isOk());
+        for(String path:List.of("/profile/index.html","/academic-details/index.html",
+            "/onboarding/index.html","/profile%20completion/index.html"))
+            web.perform(get(java.net.URI.create(path)).session(session)).andExpect(status().isOk());
+        for(String path:List.of("/profile/interests.html","/interests/index.html","/skills/index.html",
+            "/strengths/index.html","/values/index.html","/career-goal/index.html",
+            "/form%20assessment/index.html","/onboarding/prepare.html"))
+            web.perform(get(java.net.URI.create(path)).session(session)).andExpect(redirectedUrl("/profile/academic.html"));
+        web.perform(get("/api/v1/tasks").param("demo","true").session(session)).andExpect(status().isForbidden());
         write(post("/api/v1/roadmaps/preferences"),session,Map.of("slug","java"),403);
         write(post("/api/v1/tasks"),session,Map.of("title","Blocked"),403);
         write(delete("/api/v1/students/me"),session,null,204);
+    }
+    @Test void setupPagesFollowTheSavedSectionOrder()throws Exception{
+        var session=account();
+        write(put("/api/v1/students/me/academics"),session,OnboardingTestData.academics(),200);
+        web.perform(get("/career-goal/index.html").session(session)).andExpect(status().isOk());
+        web.perform(get("/interests/index.html").session(session)).andExpect(redirectedUrl("/profile/careergoal.html"));
+        write(put("/api/v1/students/me/review/career"),session,null,200);
+        web.perform(get("/interests/index.html").session(session)).andExpect(status().isOk());
+        web.perform(get("/skills/index.html").session(session)).andExpect(redirectedUrl("/profile/interests.html"));
+        complete(session,false);
+        web.perform(get("/onboarding/prepare.html").session(session)).andExpect(status().isOk());
+        web.perform(get("/dashboard/index.html").session(session)).andExpect(status().isOk());
     }
     @Test void completeSurveysRecommendDifferentPathsFromActualAnswers()throws Exception{
         var data=account();complete(data,true);var tech=account();complete(tech,false);

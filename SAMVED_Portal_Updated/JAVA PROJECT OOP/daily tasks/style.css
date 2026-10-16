@@ -1,0 +1,139 @@
+/* ==========================================================================
+   SAMVED Portal - Daily Tasks Styles
+   Lavender / Pastel Aesthetic Design System
+   ========================================================================== */
+@import url('../portal-pages.css');
+
+.task-form-panel {
+  background: #ffffff;
+  border: 1.5px solid #edf0f8;
+  border-radius: 18px;
+  padding: 22px;
+  margin-bottom: 24px;
+}
+
+.task-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.task-form-grid .full-width {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 768px) {
+  .task-form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.task-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.single-task-card {
+  background: #ffffff;
+  border: 1.5px solid #edf0f8;
+  border-radius: 16px;
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 14px;
+  transition: all 0.2s ease;
+}
+
+.single-task-card:hover {
+  transform: translateY(-2px);
+  border-color: #d8ddf4;
+  box-shadow: 0 8px 20px rgba(118, 99, 235, 0.08);
+}
+
+.single-task-card.status-completed {
+  background: #fbfdfc;
+  border-color: #e2f2ec;
+}
+
+.single-task-card.status-inprogress {
+  background: #fafbff;
+  border-color: #cfd6f6;
+}
+
+.single-task-card.status-pending {
+  background: #ffffff;
+  border-color: #edf0f8;
+}
+
+.task-card-actions {
+  display: flex;
+  gap: 8px;
+  border-top: 1px solid #edf0f8;
+  padding-top: 12px;
+}
+
+.btn-sm {
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  transition: all 0.15s ease;
+}
+
+.btn-complete {
+  background: #e6f9f4;
+  color: #169b7e;
+}
+
+.btn-complete:hover {
+  background: #21b896;
+  color: #ffffff;
+}
+
+.btn-edit {
+  background: #f0edfe;
+  color: #7663eb;
+}
+
+.btn-edit:hover {
+  background: #7663eb;
+  color: #ffffff;
+}
+
+.btn-delete {
+  background: #fef1f2;
+  color: #e11d48;
+}
+
+.btn-delete:hover {
+  background: #e11d48;
+  color: #ffffff;
+}
+
+.stage-badge {
+  padding: 3px 8px;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.badge-completed {
+  background: #e6f9f4;
+  color: #21b896;
+}
+
+.badge-active {
+  background: #f0edfe;
+  color: #7663eb;
+}
+
+.badge-locked {
+  background: #fef6ee;
+  color: #d97706;
+}

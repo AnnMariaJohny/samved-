@@ -1,0 +1,90 @@
+/* ==========================================================================
+   SAMVED Portal - Progress Tracker Styles
+   Lavender / Pastel Aesthetic Design System
+   ========================================================================== */
+@import url('../portal-pages.css');
+
+/* Progress-specific enhancements */
+.progress-milestone-card {
+  background: #ffffff;
+  border: 1.5px solid #edf0f8;
+  border-radius: 16px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition: all 0.2s ease;
+}
+
+.progress-milestone-card:hover {
+  transform: translateY(-2px);
+  border-color: #d8ddf4;
+  box-shadow: 0 8px 20px rgba(118, 99, 235, 0.08);
+}
+
+.progress-milestone-card.active-stage {
+  background: #fafbff;
+  border-color: #cfd6f6;
+  box-shadow: 0 4px 14px rgba(118, 99, 235, 0.08);
+}
+
+.progress-milestone-card.completed {
+  background: #fbfdfc;
+  border-color: #e2f2ec;
+}
+
+.milestone-icon-wrap {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.milestone-icon-wrap.completed {
+  background: #e6f9f4;
+  color: #21b896;
+}
+
+.milestone-icon-wrap.active {
+  background: #f0edfe;
+  color: #7663eb;
+  animation: pulse-subtle 2s infinite ease-in-out;
+}
+
+.milestone-icon-wrap.upcoming {
+  background: #f2f4fc;
+  color: #95a0ba;
+}
+
+.progress-overall-box {
+  background: linear-gradient(135deg, #f8f9fe 0%, #ffffff 50%, #f6f4fe 100%);
+  border: 1.5px solid #e7ebf8;
+  border-radius: 18px;
+  padding: 20px 24px;
+  margin-bottom: 24px;
+}
+
+.progress-fill-track {
+  width: 100%;
+  height: 12px;
+  border-radius: 999px;
+  background: #e4e9f7;
+  overflow: hidden;
+  margin: 10px 0;
+}
+
+.progress-fill-thumb {
+  height: 100%;
+  border-radius: inherit;
+  background: var(--portal-primary-gradient, linear-gradient(135deg, #7b68ee 0%, #a07cf8 100%));
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes pulse-subtle {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.06); }
+}

@@ -1,0 +1,21 @@
+{
+  "checks": [
+    "real registration/login opens updated academic page",
+    "academic record reloads from MySQL",
+    "interests reloads from MySQL",
+    "strengths reloads from MySQL",
+    "values reloads from MySQL",
+    "skill proficiency reloads from MySQL",
+    "exploring career review saves",
+    "real eight-section onboarding completes",
+    "dashboard shows real account in actual source layout",
+    "task completion reloads from MySQL",
+    "task edit persists",
+    "old bookmark resolves to actual updated source",
+    "real logout clears session",
+    "real login restores MySQL-backed account",
+    "QA account is deleted through real backend"
+  ],
+  "database": "MySQL",
+  "source": "SAMVED_Portal_Updated/JAVA PROJECT OOP"
+}

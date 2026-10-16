@@ -1,0 +1,32 @@
+{
+  "checks": [
+    "incomplete login opens onboarding welcome",
+    "welcome shows exactly eight required sections",
+    "feature navigation is hidden",
+    "future steps are locked",
+    "profile setup hides account settings",
+    "saved personal details advance to education",
+    "education cannot continue empty",
+    "direct future-step URL returns to unfinished step",
+    "mobile onboarding has no horizontal overflow",
+    "education unlocks continue only after API save",
+    "deleting the final education record locks continue again",
+    "resume loads saved education",
+    "explicit exploring choice is valid and advances",
+    "empty interests cannot advance",
+    "deleting the final skill locks continue again",
+    "strengths must save before advancing",
+    "values must save before advancing",
+    "assessment requires eight answers",
+    "empty assessment does not submit",
+    "all steps complete before dashboard",
+    "analysis page appears between assessment and dashboard",
+    "dashboard automatically loads opportunities",
+    "dashboard automatically computes career suggestions",
+    "dashboard automatically prepares roadmap guidance",
+    "fallback label does not claim AI was used",
+    "provider failure leaves a usable dashboard with retry",
+    "no browser errors"
+  ],
+  "errors": []
+}

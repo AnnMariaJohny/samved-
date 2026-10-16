@@ -1,0 +1,29 @@
+{
+  "checks": [
+    "registration opens guided welcome",
+    "real feature API is locked before onboarding",
+    "real server blocks jumping to future setup page",
+    "real personal save advances to academic step",
+    "real empty education cannot continue",
+    "real education save unlocks continue",
+    "judge demo requires explicit consent",
+    "judge shortcut opens separate sample student",
+    "demo still satisfies the normal backend gate",
+    "demo dashboard is clearly labelled",
+    "demo seeds pending sample work without fake completions",
+    "exit demo deletes account and ends session",
+    "original student survives demo unchanged",
+    "login resumes first unfinished step",
+    "real wizard blocks empty interest submission",
+    "all eight assessment answers remain required",
+    "real eight-section gate completes",
+    "automatic analysis precedes dashboard",
+    "dashboard reports actual recommendation source",
+    "dashboard loads opportunity matches automatically",
+    "normal account is never labelled demo",
+    "normal QA account cleaned up"
+  ],
+  "rankingSource": "AI",
+  "database": "MySQL",
+  "disposableAccountsDeleted": true
+}

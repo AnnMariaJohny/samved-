@@ -24,6 +24,9 @@ class WebBoundaryTest {
     @Test
     void homepageAndHealthArePublicButStudentApiRequiresAuthentication() throws Exception {
         browser.perform(get("/")).andExpect(status().isOk());
+        browser.perform(get("/login.html")).andExpect(status().isOk());
+        browser.perform(get("/register.html")).andExpect(status().isOk());
+        browser.perform(get("/welcome.html")).andExpect(status().isOk());
         browser.perform(get("/roadmap-explorer/index.html")).andExpect(status().isFound());
         browser.perform(get("/actuator/health")).andExpect(status().isOk());
         browser.perform(get("/api/v1/roadmaps/me")).andExpect(status().isUnauthorized());

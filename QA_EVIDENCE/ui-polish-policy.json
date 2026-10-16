@@ -1,0 +1,29 @@
+{
+  "planning": "compact",
+  "context_depth": "dependency",
+  "verification_depth": "impact",
+  "delegation": "none",
+  "reason_codes": [
+    "shared-stylesheet",
+    "all-active-pages",
+    "request-state-animation"
+  ],
+  "allowed_write_scope": [
+    "SAMVED_Portal_Updated",
+    "QA_EVIDENCE",
+    ".gitignore",
+    ".tools/publish-repo",
+    ".github/workflows"
+  ],
+  "criteria": [
+    "Updated source logo in all active headers",
+    "Consistent spacing and responsive layouts across active pages",
+    "Preparation feedback follows real request success and failure",
+    "Verified changes pushed to requested GitHub repository"
+  ],
+  "decision": {
+    "action": "Update source headers, shared layout and request status animation",
+    "reason": "User supplied new logo; dashboard cards touched and roadmap reasons were squeezed into horizontal rows",
+    "risk": "Shared stylesheet verified across every active page"
+  }
+}

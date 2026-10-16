@@ -1,0 +1,47 @@
+/* ==========================================================================
+   SAMVED Portal - Career Roadmap Styles
+   Lavender / Pastel Aesthetic Design System
+   ========================================================================== */
+@import url('../portal-pages.css');
+
+.career-select-card {
+  background: linear-gradient(135deg, #f8f9fe 0%, #ffffff 50%, #f6f4fe 100%);
+  border: 1.5px solid #e7ebf8;
+  border-radius: 18px;
+  padding: 18px 22px;
+  margin-bottom: 24px;
+}
+
+.roadmap-nodes-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.roadmap-node-card {
+  background: #ffffff;
+  border: 1.5px solid #edf0f8;
+  border-radius: 16px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition: all 0.2s ease;
+}
+
+.roadmap-node-card:hover {
+  transform: translateY(-2px);
+  border-color: #d8ddf4;
+  box-shadow: 0 8px 20px rgba(118, 99, 235, 0.08);
+}
+
+.roadmap-node-card.current {
+  background: #fafbff;
+  border-color: #cfd6f6;
+  box-shadow: 0 4px 14px rgba(118, 99, 235, 0.08);
+}
+
+.roadmap-node-card.completed {
+  background: #fbfdfc;
+  border-color: #e2f2ec;
+}

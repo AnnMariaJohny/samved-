@@ -59,11 +59,11 @@ public class PersonalRoadmapService {
         List<Section> sections=List.of(
             new Section("profile","Personal details",!p.name().isBlank()&&!p.educationLevel().isBlank(),"/profile/profile.html","Name and education level"),
             section("academics","Academic background",!p.academics().isEmpty(),"academic","Add your academic background and subjects"),
+            section("career","Career direction",!p.careerGoal().type().equals("EXPLORING")||reviewed.contains("career"),"careergoal","A goal, or an explicit choice to keep exploring"),
             section("interests","Interests",!p.interests().isEmpty(),"interests","Tell us what you enjoy"),
             section("skills","Skills",!p.skills().isEmpty(),"skills","Skills and your current level"),
             section("strengths","Strengths",!p.strengths().isEmpty(),"strengths","How you approach work and learning"),
             section("values","Values",!p.values().isEmpty(),"values","What matters to you"),
-            section("career","Career direction",!p.careerGoal().type().equals("EXPLORING")||reviewed.contains("career"),"careergoal","A goal, or an explicit choice to keep exploring"),
             new Section("assessment","Career assessment",assessmentComplete,"/assessment/assessment.html",current.answers().size()+" of "+current.questions().size()+" questions answered"));
         int complete=(int)sections.stream().filter(Section::complete).count();return new Checklist(complete,sections.size(),complete==sections.size(),sections);
     }

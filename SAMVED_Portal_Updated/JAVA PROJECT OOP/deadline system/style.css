@@ -1,0 +1,99 @@
+/* ==========================================================================
+   SAMVED Portal - Deadline System Styles
+   Lavender / Pastel Aesthetic Design System
+   ========================================================================== */
+@import url('../portal-pages.css');
+
+.deadline-full-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.deadline-card-row {
+  background: #ffffff;
+  border: 1.5px solid #edf0f8;
+  border-left: 5px solid #cfd6f6;
+  border-radius: 16px;
+  padding: 18px 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.2s ease;
+}
+
+.deadline-card-row:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(118, 99, 235, 0.08);
+}
+
+.deadline-card-row.urgent {
+  border-left-color: #f43f5e;
+  background: linear-gradient(135deg, #fffbfb 0%, #ffffff 100%);
+}
+
+.deadline-card-row.moderate {
+  border-left-color: #f59e0b;
+  background: linear-gradient(135deg, #fffdfb 0%, #ffffff 100%);
+}
+
+.deadline-card-row.safe {
+  border-left-color: #10b981;
+  background: linear-gradient(135deg, #fbfdfc 0%, #ffffff 100%);
+}
+
+.deadline-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  border-radius: 99px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+.pill-urgent {
+  background: #fef1f2;
+  color: #e11d48;
+}
+
+.pill-moderate {
+  background: #fff7ed;
+  color: #d97706;
+}
+
+.pill-safe {
+  background: #e6f9f4;
+  color: #21b896;
+}
+
+.deadline-legend-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 12px 18px;
+  background: #f8f9fe;
+  border: 1px solid #edf0f8;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.deadline-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--portal-text-muted, #7c859d);
+}
+
+.deadline-legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.deadline-legend-dot.urgent { background: #f43f5e; }
+.deadline-legend-dot.moderate { background: #f59e0b; }
+.deadline-legend-dot.safe { background: #10b981; }

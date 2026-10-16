@@ -1,0 +1,527 @@
+@import url('../portal-pages.css');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Nunito:wght@500;600;700;800&display=swap');
+
+:root {
+  --ink: #29384a;
+  --ink-soft: #566675;
+  --muted: #748293;
+  --purple: #78968d;
+  --purple-dark: #5e7f76;
+  --lavender: #edf3f1;
+  --lavender-2: #f5f7f6;
+  --line: #e1e8e5;
+  --paper: rgba(255,255,255,.92);
+  --shadow: 0 12px 30px rgba(47,70,64,.07);
+  --radius: 19px;
+  --text-dark: var(--ink);
+  --text-muted: var(--muted);
+  --accent-blue: var(--purple);
+  --accent-gold: #b29a68;
+  --gold-bg: #f7f3e9;
+  --border-color: var(--line);
+  --bg-body: #f7f9f8;
+  --success: #62a88c;
+  --danger: #d76682;
+}
+
+* { box-sizing: border-box; }
+html { min-width: 320px; scroll-behavior: smooth; }
+body { margin: 0; min-height: 100vh; color: var(--ink); background: radial-gradient(ellipse at 78% 0%, #f1edff 0, transparent 34%), #fcfaff; font-family: 'DM Sans', 'Segoe UI', sans-serif; }
+button, input, select { font: inherit; }
+button { color: inherit; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid #a995f1; outline-offset: 3px; }
+
+/* Sidebar navigation */
+.sidebar { position: fixed; z-index: 5; inset: 0 auto 0 0; width: 228px; min-height: 100vh; padding: 23px 14px; display: flex; flex-direction: column; background: linear-gradient(180deg,rgba(246,243,255,.97),rgba(239,235,255,.96)); border-right: 1px solid #e9e3fb; }
+.brand { padding: 4px 12px 23px; font: 800 22px 'Nunito', sans-serif; letter-spacing: -.5px; color: var(--ink); }
+.brand::before { content: '✿'; display: inline-grid; place-items: center; width: 35px; height: 35px; margin-right: 8px; border-radius: 13px; color: #fff; background: linear-gradient(145deg,#93cdb6,#8e76e4); vertical-align: middle; font-size: 22px; }
+.brand span { color: var(--purple); font-weight: 700; }
+.user-badge { display: flex; align-items: center; gap: 11px; margin: 0 4px 18px; padding: 13px 11px; border: 1px solid var(--line); border-radius: 15px; background: rgba(255,255,255,.66); }
+.avatar { flex: 0 0 39px; width: 39px; height: 39px; display: grid; place-items: center; border-radius: 50%; color: #fff; background: linear-gradient(145deg,#a28bec,#7460d4); font-weight: 800; }
+.nav-menu { list-style: none; padding: 0; margin: 0; display: grid; gap: 5px; }
+.nav-menu li a { min-height: 43px; display: flex; align-items: center; gap: 12px; padding: 9px 12px; color: #514b8e; text-decoration: none; font-size: 13px; font-weight: 600; border-radius: 13px; transition: .18s ease; }
+.nav-menu li a::before { content: '·'; display: inline-grid; place-items: center; width: 24px; height: 24px; flex: 0 0 24px; border-radius: 9px; color: #7462ca; background: #e9e4ff; font-size: 23px; line-height: 1; }
+.nav-menu li:nth-child(1) a::before { content: '⌂'; }.nav-menu li:nth-child(2) a::before { content: '✧'; }.nav-menu li:nth-child(3) a::before { content: '▤'; }.nav-menu li:nth-child(4) a::before { content: '✓'; }.nav-menu li:nth-child(5) a::before { content: '◷'; }.nav-menu li:nth-child(6) a::before { content: '☆'; }.nav-menu li:nth-child(7) a::before { content: '✦'; }.nav-menu li:nth-child(8) a::before { content: '▥'; }
+.nav-menu #nav-dashboard a::before { content: '⌂'; }.nav-menu #nav-roadmap a::before { content: '✧'; }.nav-menu #nav-progress a::before { content: '▤'; }.nav-menu #nav-tasks a::before { content: '✓'; }.nav-menu #nav-deadlines a::before { content: '◷'; }.nav-menu #nav-planner a::before { content: '☷'; }.nav-menu #nav-profile-completion a::before { content: '♡'; }.nav-menu #nav-opportunities a::before { content: '☆'; }.nav-menu #nav-recommendations a::before { content: '✦'; }.nav-menu #nav-charts a::before { content: '▥'; }
+.nav-menu li.active a, .nav-menu li a:hover { color: #35288e; background: #e5defe; box-shadow: inset 0 0 0 1px #d9cffd; }
+.sidebar::after { content: 'Small steps build big dreams  ♡'; margin: auto 9px 12px; padding: 18px 12px; color: #665ba9; font: italic 14px 'Nunito',sans-serif; text-align: center; line-height: 1.5; border-radius: 15px; background: linear-gradient(135deg,#f8f3ff,#f0eaff); }
+
+/* Main header and dashboard frame */
+.main-wrapper { min-height: 100vh; margin-left: 228px; min-width: 0; }
+.top-bar { min-height: 76px; display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 14px clamp(20px,3vw,42px); border-bottom: 1px solid rgba(224,217,248,.85); background: rgba(255,255,255,.72); }
+.page-header h2 { margin: 0; font: 800 20px 'Nunito',sans-serif; color: var(--ink); }
+.top-bar > div:last-child { display: flex !important; gap: 10px !important; }
+.top-bar > div:last-child span { padding: 8px 12px; border: 1px solid var(--line); border-radius: 999px; background: #fff; }
+.dashboard-container { width: min(1560px,100%); margin: auto; padding: 25px clamp(18px,2.4vw,36px) 42px; display: grid; grid-template-columns: minmax(0,1fr) 290px; gap: 20px; align-items: start; }
+.dashboard-container > .welcome-card, .dashboard-container > .career-explorer, .dashboard-container > .roadmap-wrapper, .dashboard-container > .dash-grid, .dashboard-container > .m1-sync-bar { grid-column: 1; }
+.dashboard-container > .welcome-card { grid-row: 1; }
+.dashboard-container > .career-explorer { grid-row: 3; }
+.dashboard-container > .roadmap-wrapper { grid-row: 2; }
+.dashboard-container > .dash-grid { grid-row: 4; }
+.dashboard-container::after { content: 'Your information is safe with us. We follow strict privacy practices to protect your data.  ♡'; grid-column: 2; grid-row: 3; min-height: 120px; padding: 22px; display: flex; align-items: center; color: var(--ink-soft); font-size: 13px; line-height: 1.7; border: 1px solid var(--line); border-radius: var(--radius); background: linear-gradient(145deg,#fff,#f5f1ff); box-shadow: var(--shadow); }
+.card, .roadmap-wrapper { min-width: 0; padding: 22px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper); box-shadow: var(--shadow); }
+.card-title { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px 16px; margin-bottom: 14px; color: var(--ink); font: 800 18px 'Nunito',sans-serif; }
+.welcome-card { min-height: 214px; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: center; padding: 29px 32px; background: linear-gradient(105deg,#f1eaff 0%,#fff 53%,#f6edff 100%); }
+.welcome-card::after { content: '✿'; position: absolute; right: 5%; bottom: -62px; color: rgba(138,112,222,.14); font-size: 210px; line-height: 1; pointer-events: none; }
+.welcome-card h1 { position: relative; z-index: 1; max-width: 78%; margin: 0 0 9px; color: #282074; font: 800 clamp(23px,2.3vw,34px) 'Nunito',sans-serif; }
+.welcome-card p { position: relative; z-index: 1; max-width: 72%; margin: 0; color: #66639e; font-size: 15px; line-height: 1.6; }
+.welcome-card::before { content: '✦  ✧  ♡'; position: absolute; right: 7%; top: 22px; color: #9e8ce8; font-size: 22px; letter-spacing: 14px; }
+.welcome-card::before { content: none; }
+.career-detail[hidden] { display: none; }
+.why-card .why-note::before { content: none; }
+
+/* Profile helper rail */
+.dashboard-container > .welcome-card::selection { background: #ded6ff; }
+.dashboard-container > .career-explorer::after { content: ''; }
+.dashboard-container > .welcome-card + .career-explorer { position: relative; }
+.dashboard-container > .welcome-card + .career-explorer::before { content: '✧  Profile completion'; position: absolute; top: calc(-246px); right: calc(-310px); width: 246px; height: 49px; display: flex; align-items: center; padding: 0 19px; border: 1px solid var(--line); border-radius: 15px 15px 0 0; background: #fff; color: var(--ink); font: 800 17px 'Nunito',sans-serif; }
+.dashboard-container > .welcome-card + .career-explorer::after { content: '0 of 8 sections completed\A\A Academic Details     Interests\A Skills                     Strengths\A Values                    Career Goal\A Assessment              Profile'; white-space: pre; position: absolute; top: calc(-197px); right: calc(-310px); width: 246px; height: 197px; padding: 14px 18px; border: 1px solid var(--line); border-top: 0; border-radius: 0 0 15px 15px; background: linear-gradient(160deg,#fff,#f7f3ff); color: #5c5696; font-size: 12px; line-height: 2.4; }
+
+/* Career roadmap */
+.roadmap-wrapper { grid-column: 1; }
+.roadmap-timeline { position: relative; display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; padding: 20px 2px 8px; overflow-x: auto; scrollbar-color: #d8cdfa transparent; }
+.roadmap-timeline::before { content: ''; position: absolute; top: 44px; left: 30px; right: 30px; height: 3px; border-radius: 9px; background: linear-gradient(90deg,#b3a1f4,#eadfff); }
+.roadmap-node { position: relative; z-index: 1; flex: 1 0 78px; max-width: 112px; text-align: center; cursor: pointer; }
+.node-circle { width: 48px; height: 48px; display: grid; place-items: center; margin: 0 auto 10px; border: 4px solid #fff; border-radius: 50%; color: #7064af; background: #eee9ff; box-shadow: 0 2px 10px #d9d1f4; font-weight: 800; }
+.node-title { color: #56518f; font-size: 11px; font-weight: 600; line-height: 1.45; overflow-wrap: anywhere; }
+.roadmap-node.completed .node-circle { color: #fff; background: #78b59b; }.roadmap-node.completed .node-title { color: var(--ink); }
+.roadmap-node.active .node-circle { color: #fff; background: var(--purple); box-shadow: 0 4px 15px #a895ef; }
+.roadmap-node.active .node-title { color: var(--purple-dark); font-weight: 800; }
+.progress-bar-bg { height: 9px; width: 100%; margin-top: 18px; overflow: hidden; border-radius: 99px; background: #eeeafb; }.progress-bar-fill { height: 100%; border-radius: inherit; background: linear-gradient(90deg,#9d88ee,#725ad1); transition: width .5s ease; }
+
+/* Career discovery, tasks, and cards */
+.career-explorer { overflow: hidden; position: relative; }
+.explorer-hint { color: var(--muted); font-size: 12px; font-weight: 500; }
+.career-search-label { display: block; margin: 0 0 8px; font-size: 13px; font-weight: 700; }
+.career-search-wrap { min-height: 48px; display: flex; align-items: center; gap: 10px; padding: 0 14px; border: 1px solid var(--line); border-radius: 12px; background: #fbfaff; }
+.career-search-wrap:focus-within { border-color: #aa96ef; box-shadow: 0 0 0 4px rgba(128,103,220,.12); }.career-search-wrap > span { color: var(--purple); font-size: 23px; }.career-search-wrap input { flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; color: var(--ink); font-size: 14px; }.career-search-wrap button { border: 0; background: transparent; color: var(--purple-dark); font-size: 12px; font-weight: 700; cursor: pointer; }
+.career-suggestions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }.career-suggestion { border: 1px solid #e1dafb; border-radius: 999px; padding: 7px 12px; background: #f5f1ff; color: #51448f; font-size: 12px; font-weight: 700; cursor: pointer; }.career-suggestion:hover,.career-suggestion[aria-pressed="true"] { background: #e7dfff; }
+.career-detail { display: flex; align-items: flex-start; gap: 12px; margin-top: 16px; padding: 14px; border-radius: 12px; background: linear-gradient(110deg,#faf8ff,#f0edff); }.career-detail-icon { flex: 0 0 34px; width: 34px; height: 34px; display: grid; place-items: center; border-radius: 10px; color: var(--purple-dark); background: #e5ddff; }.career-detail strong { font-size: 14px; }.career-detail p { margin: 4px 0 0; color: var(--muted); font-size: 13px; line-height: 1.5; }
+.dash-grid { display: grid; grid-template-columns: minmax(0,1.5fr) minmax(240px,1fr); gap: 18px; }.dash-grid > div { display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+.next-step-card { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-width: 0; padding: 19px 21px; border: 1px solid #ded5fc; border-radius: var(--radius); background: linear-gradient(120deg,#f5f0ff,#fff); box-shadow: var(--shadow); }.next-step-card h3 { margin: 5px 0; color: var(--ink); font: 800 17px 'Nunito',sans-serif; }.next-step-card p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.5; }.next-step-badge { color: var(--purple-dark); font-size: 10px; font-weight: 800; letter-spacing: .8px; }.btn-gold,.btn-sync { min-height: 39px; padding: 9px 16px; border: 0; border-radius: 11px; color: #fff; background: var(--purple); font-weight: 700; white-space: nowrap; cursor: pointer; transition: .18s; }.btn-gold:hover,.btn-sync:hover { background: var(--purple-dark); transform: translateY(-1px); }
+.opp-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,190px),1fr)); gap: 12px; }.opp-card { min-width: 0; padding: 15px; border: 1px solid var(--line); border-radius: 13px; background: #fff; transition: .18s; }.opp-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }.opp-type { display: inline-block; margin-bottom: 8px; padding: 4px 8px; border-radius: 99px; color: #654ac0; background: #f0ebff; font-size: 10px; font-weight: 800; text-transform: uppercase; }
+.skill-chip { display: inline-block; margin: 0 5px 6px 0; padding: 6px 10px; border-radius: 99px; color: #594d95; background: #f0edfa; font-size: 12px; font-weight: 700; }
+.deadline-item { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 9px; padding: 12px; border: 1px solid var(--line); border-radius: 12px; background: #fcfbff; }.deadline-tag { flex-shrink: 0; padding: 5px 9px; border-radius: 99px; background: #f7e9f1; color: #b34e7a; font-size: 11px; font-weight: 700; }.tag-normal { background: #e8f5ef; color: #398366; }.tag-urgent { background: #fff0f2; color: #c45168; }
+.task-input-group { display: flex; gap: 8px; margin-bottom: 12px; }.task-input-group input { flex: 1; min-width: 0; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; background: #fff; }.task-list { list-style: none; }.task-item { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid #f0edfa; }.task-item.completed span { color: var(--muted); text-decoration: line-through; }
+
+/* Profile simulator stays usable but takes little visual space. */
+.m1-sync-bar { display: flex; align-items: center; flex-wrap: wrap; gap: 10px 14px; padding: 12px 15px; border: 1px solid var(--line); border-radius: 14px; background: #fff; color: var(--ink-soft); font-size: 12px; }.m1-sync-bar > span:first-child { margin-right: auto; }.m1-sync-bar label { margin-right: 4px; color: var(--muted); font-weight: 700; }.m1-sync-bar select,.m1-sync-bar input { max-width: 190px; padding: 7px 9px; border: 1px solid var(--line); border-radius: 8px; color: var(--ink); background: #faf9ff; font-size: 12px; }.m1-sync-bar .btn-sync { min-height: 34px; padding: 7px 11px; font-size: 12px; }
+.m1-sync-details { padding: 0 clamp(18px,2.4vw,36px); background: rgba(255,255,255,.48); }.m1-sync-details summary { width: max-content; padding: 9px 0; color: var(--muted); font-size: 12px; font-weight: 700; cursor: pointer; }.m1-sync-details[open] { padding-bottom: 12px; }.m1-sync-details .m1-sync-bar { padding: 10px 12px; }
+.career-mascot { display: none; }
+.next-step-card.step-complete { background: #eef8f2; border-color: #9fceb7; }.next-step-card .btn-gold:disabled { background: #67a989; cursor: default; }
+
+@media (min-width: 1450px) { .dashboard-container { grid-template-columns: minmax(0,1fr) 310px; gap: 22px; }.dashboard-container > .welcome-card + .career-explorer::before,.dashboard-container > .welcome-card + .career-explorer::after { right: calc(-332px); }.dash-grid { grid-template-columns: minmax(0,1.55fr) minmax(260px,1fr); } }
+@media (max-width: 1120px) { .dashboard-container { grid-template-columns: minmax(0,1fr); }.dashboard-container > .welcome-card,.dashboard-container > .career-explorer,.dashboard-container > .roadmap-wrapper,.dashboard-container > .dash-grid,.dashboard-container > .m1-sync-bar { grid-column: 1; grid-row: auto; }.dashboard-container::after,.dashboard-container > .welcome-card + .career-explorer::before,.dashboard-container > .welcome-card + .career-explorer::after { display: none; }.dash-grid { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+@media (max-width: 760px) { .sidebar { position: static; width: 100%; min-height: 0; padding: 10px 12px; border-right: 0; border-bottom: 1px solid var(--line); }.brand { padding: 2px 7px 9px; font-size: 19px; }.brand::before { width: 30px; height: 30px; }.user-badge,.sidebar::after { display: none; }.nav-menu { display: flex; overflow-x: auto; gap: 5px; padding-bottom: 2px; }.nav-menu li { flex: 0 0 auto; }.nav-menu li a { min-height: 38px; gap: 6px; padding: 7px 10px; white-space: nowrap; font-size: 12px; }.nav-menu li a::before { width: 21px; height: 21px; flex-basis: 21px; }.main-wrapper { margin-left: 0; }.top-bar { min-height: 61px; padding: 10px 16px; }.top-bar > div:last-child span { padding: 6px 9px; font-size: 11px !important; }.dashboard-container { padding: 16px 13px 30px; gap: 14px; }.welcome-card { min-height: 175px; padding: 22px; }.welcome-card h1,.welcome-card p { max-width: 88%; }.welcome-card::after { right: -30px; font-size: 150px; }.card,.roadmap-wrapper { padding: 17px; border-radius: 16px; }.card-title { font-size: 16px; }.dash-grid { grid-template-columns: minmax(0,1fr); gap: 14px; }.dash-grid > div { gap: 14px; }.roadmap-timeline { justify-content: flex-start; }.roadmap-node { flex-basis: 88px; }.m1-sync-bar { gap: 9px; }.m1-sync-bar > span:first-child { flex-basis: 100%; }.next-step-card { align-items: flex-start; flex-direction: column; }.next-step-card .btn-gold { width: 100%; } }
+@media (prefers-reduced-motion: reduce) { *,*::before,*::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } }
+
+/* Real, responsive information rail and welcome profile strip. */
+.dashboard-container::after { content: none; }
+.dashboard-rail { grid-column: 2; grid-row: 1 / span 3; display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+.dashboard-rail .card { padding: 19px; }
+.dashboard-rail h2 { margin: 0 0 16px; font: 800 17px 'Nunito',sans-serif; }
+.profile-completion > p { margin: 0 0 12px; color: var(--ink-soft); font-size: 13px; }
+.profile-progress { height: 9px; overflow: hidden; border-radius: 99px; background: #ece8fb; }.profile-progress span { display: block; width: 0; height: 100%; background: var(--purple); }
+.profile-progress-label { margin: 5px 0 17px; text-align: right; color: var(--purple-dark); font-size: 12px; font-weight: 700; }
+.profile-completion h3 { margin: 0 0 10px; padding-top: 13px; border-top: 1px solid #eeeafb; font-size: 13px; }
+.profile-section-list { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 7px; }.profile-section-list button { min-width: 0; min-height: 38px; padding: 7px 5px; border: 1px solid var(--line); border-radius: 9px; color: #534b91; background: #fdfcff; font-size: 10px; text-align: center; cursor: pointer; transition: background .16s,border-color .16s,transform .16s; }.profile-section-list button::before { content: '○'; margin-right: 4px; color: #9e8be5; }.profile-section-list button:hover { border-color: #b7a7ef; background: #f6f2ff; transform: translateY(-1px); }.profile-section-list button.is-complete { border-color: #a99ae8; color: #45378f; background: #f1edff; }.profile-section-list button.is-complete::before { content: '✓'; color: #6c58c9; font-weight: 800; }
+.profile-manage-link { display: inline-flex; margin-top: 10px; color: var(--purple-dark); font-size: 11px; font-weight: 700; text-decoration: none; }.profile-manage-link:hover { text-decoration: underline; }
+.why-card p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.7; }.why-card .why-note { margin: 17px -2px -2px; padding: 13px; border-radius: 12px; color: #6757b0; background: linear-gradient(125deg,#f4efff,#fbf7ff); font: italic 700 14px 'Nunito',sans-serif; text-align: right; }
+.welcome-profile { position: relative; z-index: 1; display: flex; align-items: center; gap: 12px; width: min(450px,100%); margin-top: 17px; padding: 9px 13px; border: 1px solid rgba(222,213,251,.9); border-radius: 999px; background: rgba(255,255,255,.74); }.welcome-profile-icon { display: grid; place-items: center; width: 38px; height: 38px; flex: 0 0 38px; border-radius: 50%; color: #614bcc; background: #eee9ff; font-size: 22px; }.welcome-profile strong,.welcome-profile small { display: block; }.welcome-profile strong { font-size: 13px; }.welcome-profile small { margin-top: 2px; color: var(--muted); font-size: 11px; }.welcome-note { margin-left: auto; padding-left: 12px; border-left: 1px solid #ded7f6; color: #6955be; font: italic 700 12px 'Nunito',sans-serif; line-height: 1.4; }
+@media (min-width: 1450px) { .dashboard-container { grid-template-columns: minmax(0,1fr) 310px; gap: 22px; }.dash-grid { grid-template-columns: minmax(0,1.55fr) minmax(260px,1fr); } }
+@media (max-width: 1120px) { .dashboard-container { grid-template-columns: minmax(0,1fr); }.dashboard-container > .welcome-card,.dashboard-container > .career-explorer,.dashboard-container > .roadmap-wrapper,.dashboard-container > .dash-grid,.dashboard-container > .m1-sync-bar { grid-column: 1; grid-row: auto; }.dashboard-rail { grid-column: 1; grid-row: auto; display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); }.dash-grid { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+@media (max-width: 760px) { .m1-sync-details { padding-right: 13px; padding-left: 13px; }.sidebar { position: static; width: 100%; min-height: 0; padding: 10px 12px; border-right: 0; border-bottom: 1px solid var(--line); }.brand { padding: 2px 7px 9px; font-size: 19px; }.brand::before { width: 30px; height: 30px; }.user-badge,.sidebar::after { display: none; }.nav-menu { display: flex; overflow-x: auto; gap: 5px; padding-bottom: 2px; }.nav-menu li { flex: 0 0 auto; }.nav-menu li a { min-height: 38px; gap: 6px; padding: 7px 10px; white-space: nowrap; font-size: 12px; }.nav-menu li a::before { width: 21px; height: 21px; flex-basis: 21px; }.main-wrapper { margin-left: 0; }.top-bar { min-height: 61px; padding: 10px 16px; }.top-bar > div:last-child span { padding: 6px 9px; font-size: 11px !important; }.dashboard-container { padding: 16px 13px 30px; gap: 14px; }.dashboard-rail { grid-template-columns: minmax(0,1fr); gap: 14px; }.welcome-card { min-height: 175px; padding: 22px; }.welcome-card h1,.welcome-card p { max-width: 88%; }.welcome-card::after { right: -30px; font-size: 150px; }.welcome-profile { border-radius: 16px; }.card,.roadmap-wrapper { padding: 17px; border-radius: 16px; }.card-title { font-size: 16px; }.dash-grid { grid-template-columns: minmax(0,1fr); gap: 14px; }.dash-grid > div { gap: 14px; }.roadmap-timeline { justify-content: flex-start; }.roadmap-node { flex-basis: 88px; }.m1-sync-bar { gap: 9px; }.m1-sync-bar > span:first-child { flex-basis: 100%; }.next-step-card { align-items: flex-start; flex-direction: column; }.next-step-card .btn-gold { width: 100%; } }
+
+/* Clear controls and aligned details at every screen size. */
+.roadmap-timeline { scrollbar-width: none; }.roadmap-timeline::-webkit-scrollbar { display: none; }
+.welcome-card { isolation: isolate; background: radial-gradient(ellipse at 85% 100%,rgba(204,191,251,.45),transparent 31%), radial-gradient(ellipse at 100% 0%,rgba(246,220,246,.7),transparent 38%), linear-gradient(105deg,#f1eaff 0%,#fff 53%,#f6edff 100%); }
+.welcome-card::after { z-index: 0; content: ''; right: 0; bottom: 0; width: 34%; height: 100%; color: transparent; background: radial-gradient(ellipse at 79% 88%,rgba(166,145,232,.2) 0 13%,transparent 13.5%), radial-gradient(ellipse at 95% 85%,rgba(195,180,244,.24) 0 17%,transparent 17.5%), radial-gradient(ellipse at 65% 100%,rgba(222,211,251,.52) 0 23%,transparent 23.5%), radial-gradient(ellipse at 91% 110%,rgba(226,217,252,.72) 0 26%,transparent 26.5%); }
+.welcome-art { position: absolute; z-index: 0; top: 0; right: 0; width: 53%; height: 100%; object-fit: cover; object-position: center; opacity: .93; mix-blend-mode: multiply; pointer-events: none; -webkit-mask-image: linear-gradient(90deg,transparent 0%,rgba(0,0,0,.48) 18%,#000 37%); mask-image: linear-gradient(90deg,transparent 0%,rgba(0,0,0,.48) 18%,#000 37%); }
+.welcome-card h1,.welcome-card > p,.welcome-card .welcome-profile { max-width: min(450px,68%); }
+.welcome-profile { width: min(390px,68%); }
+.roadmap-node .node-circle { color: #7866c9; background: #eee9ff; box-shadow: 0 2px 10px rgba(128,103,220,.15); }
+.roadmap-node.completed .node-circle { color: #fff; background: #a99ae8; }.roadmap-node.active .node-circle { color: #fff; background: #8e7add; box-shadow: 0 4px 15px rgba(142,122,221,.3); }
+.roadmap-controls { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 10px; color: #8279b5; font-size: 11px; }.roadmap-controls button { display: grid; place-items: center; width: 31px; height: 31px; border: 1px solid #e1daf8; border-radius: 50%; background: #f5f1ff; color: #7765c9; font-size: 18px; cursor: pointer; }.roadmap-controls button:hover { background: #e9e2ff; }.roadmap-controls button:disabled { opacity: .4; cursor: default; }
+.why-card .why-note { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 49px; margin: 17px 0 0; padding: 12px; text-align: center; font-style: normal; }.why-card .why-note::before { content: '✦'; color: #9b87e6; font-size: 18px; }
+.task-input-group { align-items: stretch; }.task-input-group input { min-width: 0; height: 42px; }.task-input-group .btn-sync { min-width: 64px; height: 42px; }.task-item { display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: center; gap: 10px; }.task-item > div { min-width: 0; display: flex; align-items: flex-start; gap: 8px; }.task-item > div input { flex: 0 0 auto; margin: 3px 0 0; accent-color: var(--purple); }.task-item > div span { min-width: 0; margin: 0 !important; overflow-wrap: anywhere; line-height: 1.45; }.task-item > button { width: 32px; height: 32px; border-radius: 9px !important; font-size: 16px; }.task-item > button:hover { background: #fff0f3 !important; }
+.opportunity-dialog { width: min(440px,calc(100% - 28px)); padding: 28px; border: 1px solid var(--line); border-radius: 20px; color: var(--ink); background: #fff; box-shadow: 0 24px 80px rgba(44,31,99,.25); }.opportunity-dialog::backdrop { background: rgba(39,31,87,.36); backdrop-filter: blur(3px); }.opportunity-dialog h2 { margin: 11px 0; font: 800 22px 'Nunito',sans-serif; }.opportunity-dialog p { color: var(--muted); font-size: 14px; line-height: 1.65; }.opportunity-dialog .dialog-deadline { padding: 10px 12px; border-radius: 10px; background: #f5f1ff; color: var(--ink-soft); }.dialog-close { position: absolute; top: 10px; right: 11px; width: 32px; height: 32px; border: 0; border-radius: 50%; background: #f4f0ff; color: var(--purple-dark); font-size: 22px; cursor: pointer; }
+.career-no-results { padding: 7px 2px; color: var(--muted); font-size: 13px; }
+@media (max-width: 760px) { .welcome-art { width: 55%; opacity: .55; -webkit-mask-image: linear-gradient(90deg,transparent 0%,rgba(0,0,0,.2) 28%,#000 65%); mask-image: linear-gradient(90deg,transparent 0%,rgba(0,0,0,.2) 28%,#000 65%); }.welcome-card h1,.welcome-card > p { max-width: 88%; }.welcome-card .welcome-profile { max-width: 100%; width: min(390px,100%); }.roadmap-controls { margin-top: 6px; }.roadmap-controls span { text-align: center; }.task-input-group { align-items: center; } }
+
+/* Keep the illustration inside the original compact welcome banner. */
+.dashboard-container > .welcome-card { height: 230px; min-height: 230px; padding: 26px 30px; }
+.dashboard-container > .welcome-card::before,
+.dashboard-container > .welcome-card::after { display: none; }
+.dashboard-container > .welcome-card > .welcome-art { position: absolute; z-index: 0; inset: 0 0 0 auto; display: block; width: 57%; height: 100%; max-width: 57%; object-fit: contain; object-position: right center; opacity: .95; mix-blend-mode: multiply; pointer-events: none; -webkit-mask-image: linear-gradient(90deg,transparent 0%,rgba(0,0,0,.35) 20%,#000 42%); mask-image: linear-gradient(90deg,transparent 0%,rgba(0,0,0,.35) 20%,#000 42%); }
+.dashboard-container > .welcome-card > h1,
+.dashboard-container > .welcome-card > p,
+.dashboard-container > .welcome-card > .welcome-profile { position: relative; z-index: 1; }
+.dashboard-container > .welcome-card > h1 { max-width: 66%; margin-bottom: 7px; }
+.dashboard-container > .welcome-card > p { max-width: 62%; font-size: 14px; line-height: 1.5; }
+.dashboard-container > .welcome-card > .welcome-profile { width: min(390px,58%); max-width: 58%; margin-top: 13px; }
+@media (max-width: 760px) {
+  .dashboard-container > .welcome-card { height: auto; min-height: 220px; padding: 21px 19px; }
+  .dashboard-container > .welcome-card > .welcome-art { width: 56%; max-width: 56%; opacity: .65; -webkit-mask-image: linear-gradient(90deg,transparent 0%,rgba(0,0,0,.18) 25%,#000 65%); mask-image: linear-gradient(90deg,transparent 0%,rgba(0,0,0,.18) 25%,#000 65%); }
+  .dashboard-container > .welcome-card > h1 { max-width: 88%; }
+  .dashboard-container > .welcome-card > p { max-width: 75%; }
+  .dashboard-container > .welcome-card > .welcome-profile { width: min(390px,100%); max-width: 100%; }
+}
+
+/* Fit the complete dashboard in one desktop viewport. Smaller screens retain normal page scrolling. */
+@media (min-width: 1100px) and (min-height: 760px) {
+  html, body { height: 100%; overflow: hidden; }
+  .main-wrapper { height: 100vh; min-height: 0; overflow: hidden; }
+  .top-bar { height: 72px; min-height: 72px; flex: 0 0 72px; padding-top: 10px; padding-bottom: 10px; }
+  .m1-sync-details { flex: 0 0 30px; min-height: 30px; padding-top: 0; padding-bottom: 0; }
+  .m1-sync-details summary { padding-top: 6px; padding-bottom: 6px; }
+  .m1-sync-details[open] { flex: 0 0 auto; }
+  .dashboard-container { width: 100%; height: calc(100vh - 102px); margin: 0; padding: 12px 20px 14px; overflow: hidden; grid-template-columns: minmax(0,1fr) 280px; grid-template-rows: 170px 210px auto; align-content: start; gap: 10px; }
+  .dashboard-container > .welcome-card { grid-column: 1; grid-row: 1; height: 100%; min-height: 0; padding: 15px 22px; }
+  .dashboard-container > .welcome-card > h1 { max-width: 61%; margin-bottom: 4px; font-size: clamp(24px,2vw,30px); }
+  .dashboard-container > .welcome-card > p { max-width: 58%; font-size: 13px; line-height: 1.4; }
+  .dashboard-container > .welcome-card > .welcome-profile { width: min(370px,55%); max-width: 55%; margin-top: 8px; padding: 6px 10px; }
+  .dashboard-container > .welcome-card > .welcome-profile-icon { width: 32px; height: 32px; flex-basis: 32px; }
+  .dashboard-container > .welcome-card > .welcome-art { width: 57%; max-width: 57%; }
+  .dashboard-container > .dashboard-rail { grid-column: 2; grid-row: 1 / span 3; min-height: 0; gap: 10px; overflow: visible; }
+  .dashboard-rail .card { padding: 14px; }
+  .dashboard-rail h2 { margin-bottom: 10px; font-size: 15px; }
+  .profile-section-list { gap: 5px; }
+  .profile-section-list button { min-height: 33px; padding: 5px 4px; font-size: 9px; }
+  .dashboard-container > .roadmap-wrapper { grid-column: 1; grid-row: 2; height: 100%; min-height: 0; padding: 12px 15px 10px; overflow: hidden; }
+  .roadmap-wrapper .card-title { margin-bottom: 6px; font-size: 16px; }
+  .roadmap-timeline { padding: 8px 0 2px; }
+  .roadmap-timeline::before { top: 32px; }
+  .roadmap-node { flex-basis: 70px; }
+  .node-circle { width: 38px; height: 38px; margin-bottom: 5px; }
+  .node-title { font-size: 9px; line-height: 1.25; }
+  .roadmap-controls { margin-top: 3px; }
+  .roadmap-controls button { width: 25px; height: 25px; font-size: 15px; }
+  .progress-bar-bg { height: 7px; margin-top: 7px; }
+  .dashboard-container > .career-explorer { grid-column: 1; grid-row: 3; align-self: start; height: auto; min-height: 0; padding: 13px; overflow: visible; }
+  .career-explorer .card-title { margin-bottom: 8px; font-size: 16px; }
+  .explorer-hint { font-size: 10px; }
+  .career-search-label { margin-bottom: 5px; font-size: 11px; }
+  .career-search-wrap { min-height: 38px; padding: 0 10px; }
+  .career-search-wrap input { font-size: 12px; }
+  .career-suggestions { gap: 5px; margin-top: 7px; }
+  .career-suggestion { padding: 5px 8px; font-size: 10px; }
+  .career-detail { gap: 8px; margin-top: 9px; padding: 9px; }
+  .career-detail p { font-size: 11px; line-height: 1.35; }
+  .career-opportunities { margin-top: 14px; }
+  .career-opportunities .card-title { margin-bottom: 8px; font-size: 15px; }
+  .career-opportunities .opp-grid { grid-template-columns: repeat(3,minmax(0,1fr)); gap: 9px; }
+  .career-opportunities .opp-card { padding: 10px; }
+  .career-opportunities .opp-card h4 { font-size: 12px !important; line-height: 1.3; }
+  .career-opportunities .opp-card p { margin-bottom: 7px !important; font-size: 10px !important; }
+  .career-opportunities .opp-card .btn-sync { min-height: 29px; padding: 5px; }
+}
+
+/* Keep the dashboard sections aligned within Chrome's desktop viewport. */
+@media (min-width: 1100px) and (min-height: 760px) {
+  html, body { height: 100%; overflow: hidden; }
+  .main-wrapper { display: flex; flex-direction: column; height: 100dvh; min-height: 0; overflow: hidden; }
+  .top-bar { flex: 0 0 76px; }
+  .m1-sync-details { flex: 0 0 36px; min-height: 36px; }
+  .m1-sync-details summary { padding-top: 8px; padding-bottom: 8px; }
+  .dashboard-container { flex: 1 1 auto; height: auto; min-height: 0; grid-template-rows: minmax(145px,.75fr) minmax(175px,.9fr) minmax(285px,1.45fr); gap: 10px; padding: 10px 20px 12px; overflow: hidden; }
+  .dashboard-container > .welcome-card { height: 100%; min-height: 0; padding: 13px 22px; }
+  .dashboard-container > .welcome-card > h1 { margin-bottom: 4px; }
+  .dashboard-container > .welcome-card > p { font-size: 12px; line-height: 1.35; }
+  .dashboard-container > .welcome-card > .welcome-profile { margin-top: 7px; padding: 5px 10px; }
+  .dashboard-container > .roadmap-wrapper { height: 100%; min-height: 0; padding: 10px 15px 8px; }
+  .roadmap-wrapper .card-title { margin-bottom: 3px; }
+  .roadmap-timeline { gap: 4px; padding: 7px 0 2px; overflow-x: hidden; }
+  .roadmap-timeline::before { top: 27px; }
+  .roadmap-node { flex: 1 1 0; min-width: 0; }
+  .node-circle { width: 36px; height: 36px; margin-bottom: 4px; }
+  .node-title { font-size: 9px; line-height: 1.2; }
+  .roadmap-controls { margin-top: 0; }
+  .roadmap-controls button { width: 23px; height: 23px; font-size: 14px; }
+  .progress-bar-bg { height: 6px; margin-top: 5px; }
+  .dashboard-container > .career-explorer { height: 100%; min-height: 0; padding: 11px 13px; overflow: hidden; }
+  .career-explorer .card-title { margin-bottom: 5px; }
+  .career-search-label { margin-bottom: 3px; font-size: 10px; }
+  .career-search-wrap { min-height: 34px; }
+  .career-suggestions { gap: 4px; margin-top: 4px; }
+  .career-suggestion { padding: 4px 7px; font-size: 9px; }
+  .career-detail { margin-top: 5px; padding: 6px 8px; }
+  .career-detail[hidden] { display: none; }
+  .career-detail p { font-size: 10px; line-height: 1.25; }
+  .career-opportunities { margin-top: 7px; }
+  .career-opportunities .card-title { margin-bottom: 5px; font-size: 13px; }
+  .career-opportunities .opp-grid { gap: 7px; }
+  .career-opportunities .opp-card { padding: 7px 9px; }
+  .career-opportunities .opp-card h4 { margin-top: 3px; margin-bottom: 4px !important; font-size: 11px !important; }
+  .career-opportunities .opp-card p { margin-bottom: 5px !important; font-size: 9px !important; }
+  .career-opportunities .opp-card .btn-sync { min-height: 25px; padding: 4px; font-size: 10px !important; }
+  .why-card .why-note::before { content: none; }
+}
+
+.career-suggestions { margin-bottom: 9px; }
+.career-opportunities { margin-top: 9px; padding-top: 7px; border-top: 1px solid #eeeafb; }
+
+/* Balanced single-viewport dashboard layout for desktop Chrome. */
+@media (min-width: 1100px) and (min-height: 580px) {
+  html, body { width: 100%; height: 100%; min-height: 0; overflow: hidden; }
+  .main-wrapper { display: flex; flex-direction: column; height: 100dvh; min-height: 0; overflow: hidden; }
+  .top-bar { height: 72px; min-height: 72px; flex: 0 0 72px; padding-top: 10px; padding-bottom: 10px; }
+  .m1-sync-details { flex: 0 0 28px; min-height: 28px; }
+  .m1-sync-details summary { padding: 4px 0; font-size: 10px; line-height: 1.2; }
+  .m1-sync-details[open] { flex: 0 0 auto; }
+  .dashboard-container { flex: 1 1 auto; width: 100%; height: auto; min-height: 0; margin: 0; padding: 8px 16px 10px; overflow: hidden; grid-template-columns: minmax(0,1fr) 280px; grid-template-rows: minmax(90px,.65fr) minmax(110px,.75fr) minmax(170px,1fr); gap: 8px; align-content: stretch; }
+  .dashboard-container > .welcome-card { height: 100%; min-height: 0; padding: 10px 16px; }
+  .dashboard-container > .welcome-card > h1 { max-width: 61%; margin-bottom: 4px; font-size: clamp(22px,2vw,29px); }
+  .dashboard-container > .welcome-card > p { max-width: 58%; font-size: 12px; line-height: 1.35; }
+  .dashboard-container > .welcome-card > .welcome-profile { width: min(350px,55%); max-width: 55%; margin-top: 6px; padding: 5px 8px; }
+  .dashboard-container > .welcome-card > .welcome-profile-icon { width: 31px; height: 31px; flex-basis: 31px; }
+  .dashboard-container > .roadmap-wrapper { height: 100%; min-height: 0; padding: 9px 12px 7px; overflow: hidden; }
+  .roadmap-wrapper .card-title { margin-bottom: 4px; font-size: 15px; }
+  .roadmap-timeline { gap: 3px; padding: 6px 0 1px; overflow: hidden; }
+  .roadmap-timeline::before { top: 25px; }
+  .roadmap-node { flex: 1 1 0; min-width: 0; }
+  .node-circle { width: 33px; height: 33px; margin-bottom: 3px; }
+  .node-title { font-size: 9px; line-height: 1.2; }
+  .roadmap-controls { margin-top: 0; }
+  .roadmap-controls button { width: 22px; height: 22px; font-size: 13px; }
+  .progress-bar-bg { height: 6px; margin-top: 4px; }
+  .dashboard-container > .career-explorer { height: 100%; min-height: 0; padding: 9px 11px; overflow: hidden; }
+  .career-explorer .card-title { margin-bottom: 4px; font-size: 15px; }
+  .explorer-hint { font-size: 10px; }
+  .career-search-label { margin-bottom: 3px; font-size: 10px; }
+  .career-search-wrap { min-height: 32px; padding: 0 9px; }
+  .career-search-wrap input { font-size: 12px; }
+  .career-suggestions { gap: 4px; margin: 4px 0; }
+  .career-suggestion { padding: 4px 7px; font-size: 10px; }
+  .career-detail { gap: 7px; margin-top: 5px; padding: 6px 8px; }
+  .career-detail strong { font-size: 12px; }
+  .career-detail p { font-size: 10px; line-height: 1.25; }
+  .career-opportunities { margin-top: 5px; padding-top: 5px; }
+  .career-opportunities .card-title { margin-bottom: 5px; font-size: 14px; }
+  .career-opportunities .opp-grid { grid-template-columns: repeat(3,minmax(0,1fr)); gap: 6px; }
+  .career-opportunities .opp-card { min-width: 0; padding: 6px 7px; }
+  .career-opportunities .opp-type { margin-bottom: 4px; padding: 3px 6px; font-size: 9px; }
+  .career-opportunities .opp-card h4 { margin: 2px 0 4px !important; font-size: 11px !important; line-height: 1.2; }
+  .career-opportunities .opp-card p { margin-bottom: 4px !important; font-size: 10px !important; }
+  .career-opportunities .opp-card .btn-sync { min-height: 24px; padding: 4px; font-size: 10px !important; }
+  .dashboard-container > .dashboard-rail { grid-column: 2; grid-row: 1 / span 3; min-height: 0; gap: 8px; overflow: hidden; }
+  .dashboard-rail .card { min-height: 0; padding: 12px; }
+  .dashboard-rail h2 { margin-bottom: 8px; font-size: 15px; }
+  .profile-completion > p { margin-bottom: 7px; font-size: 11px; }
+  .profile-progress { height: 8px; }
+  .profile-progress-label { margin: 4px 0 8px; font-size: 10px; }
+  .profile-completion h3 { margin-bottom: 7px; padding-top: 8px; font-size: 11px; }
+  .profile-section-list { gap: 5px; }
+  .profile-section-list button { min-height: 29px; padding: 4px 5px; font-size: 10px; }
+  .why-card p { font-size: 11px; line-height: 1.4; }
+  .why-card .why-note { min-height: 34px; margin-top: 9px; padding: 7px; font-size: 11px; }
+}
+
+/* A small reduction in vertical spacing keeps the complete sidebar visible at browser zoom. */
+@media (min-width: 761px) and (max-height: 700px) {
+  .sidebar { padding: 12px 14px; }
+  .brand { padding-bottom: 12px; }
+  .user-badge { margin-bottom: 9px; padding-top: 8px; padding-bottom: 8px; }
+  .nav-menu { gap: 2px; }
+  .nav-menu li a { min-height: 34px; padding-top: 5px; padding-bottom: 5px; font-size: 13px; }
+  .nav-menu li a::before { width: 23px; height: 23px; flex-basis: 23px; }
+  .sidebar::after { margin-top: auto; padding-top: 8px; padding-bottom: 8px; }
+}
+
+@media (min-width: 1100px) and (max-height: 700px) {
+  .dashboard-container { padding-top: 6px; padding-bottom: 8px; grid-template-rows: minmax(82px,.6fr) minmax(102px,.7fr) minmax(160px,.9fr); gap: 7px; }
+  .dashboard-container > .welcome-card { padding: 8px 13px; }
+  .dashboard-container > .welcome-card > h1 { font-size: clamp(20px,1.8vw,25px); }
+  .dashboard-container > .welcome-card > p { font-size: 11px; }
+  .dashboard-container > .welcome-card > .welcome-profile { margin-top: 4px; padding: 4px 7px; }
+  .dashboard-container > .welcome-card > .welcome-profile small { font-size: 10px; }
+  .dashboard-container > .roadmap-wrapper { padding: 7px 9px 5px; }
+  .roadmap-wrapper .card-title { font-size: 13px; }
+  .node-circle { width: 29px; height: 29px; }
+  .node-title { font-size: 8px; }
+  .dashboard-container > .career-explorer { padding: 7px 9px; }
+  .career-opportunities .opp-card { padding: 5px 6px; }
+  .career-opportunities .opp-card h4 { font-size: 9px !important; }
+  .dashboard-rail .card { padding: 9px; }
+  .profile-section-list button { min-height: 26px; font-size: 8px; }
+  .why-card p { font-size: 10px; }
+}
+
+/* Match the compact reference dashboard at normal desktop Chrome size. */
+@media (min-width: 1100px) and (min-height: 700px) {
+  html, body { width: 100%; height: 100%; min-height: 0; overflow: hidden; }
+  .sidebar { width: 228px; height: 100dvh; min-height: 0; padding: 22px 14px; }
+  .main-wrapper { display: flex; flex-direction: column; height: 100dvh; min-height: 0; margin-left: 228px; overflow: hidden; }
+  .top-bar { flex: 0 0 76px; min-height: 76px; padding: 12px 28px; }
+  .m1-sync-details { flex: 0 0 36px; min-height: 36px; padding-right: 28px; padding-left: 28px; }
+  .m1-sync-details summary { padding: 8px 0; font-size: 11px; }
+  .dashboard-container { flex: 1 1 auto; width: 100%; max-width: none; min-height: 0; height: auto; margin: 0; padding: 8px 20px 14px; overflow: hidden; grid-template-columns: minmax(0,1fr) 280px; grid-template-rows: .49fr .57fr .94fr; gap: 10px; align-content: stretch; align-items: stretch; }
+  .dashboard-container > .welcome-card { grid-column: 1; grid-row: 1; height: 100%; min-height: 0; padding: 12px 22px; }
+  .dashboard-container > .welcome-card > h1 { max-width: 66%; margin-bottom: 5px; font-size: clamp(25px,2vw,32px); }
+  .dashboard-container > .welcome-card > p { max-width: 62%; font-size: 12px; line-height: 1.4; }
+  .dashboard-container > .welcome-card > .welcome-profile { width: min(370px,58%); max-width: 58%; margin-top: 8px; padding: 6px 9px; }
+  .dashboard-container > .welcome-card > .welcome-art { width: 53%; max-width: 53%; }
+  .dashboard-container > .dashboard-rail { grid-column: 2; grid-row: 1 / span 3; min-height: 0; gap: 10px; overflow: hidden; }
+  .dashboard-rail .card { padding: 15px; }
+  .dashboard-rail h2 { margin-bottom: 10px; font-size: 16px; }
+  .profile-completion > p { margin-bottom: 9px; font-size: 12px; }
+  .profile-progress-label { margin: 4px 0 7px; font-size: 11px; }
+  .profile-completion h3 { margin-bottom: 8px; padding-top: 9px; font-size: 12px; }
+  .profile-section-list { gap: 6px; }
+  .profile-section-list button { min-height: 32px; padding: 5px 4px; font-size: 10px; }
+  .why-card p { font-size: 12px; line-height: 1.55; }
+  .why-card .why-note { min-height: 40px; margin-top: 11px; padding: 8px; font-size: 12px; }
+  .dashboard-container > .roadmap-wrapper { grid-column: 1; grid-row: 2; height: 100%; min-height: 0; padding: 10px 15px 8px; overflow: hidden; }
+  .roadmap-wrapper .card-title { margin-bottom: 3px; font-size: 16px; }
+  .roadmap-timeline { gap: 4px; padding: 7px 0 2px; overflow: hidden; }
+  .roadmap-timeline::before { top: 27px; }
+  .roadmap-node { flex: 1 1 0; min-width: 0; }
+  .node-circle { width: 36px; height: 36px; margin-bottom: 4px; }
+  .node-title { font-size: 9px; line-height: 1.25; }
+  .roadmap-controls { margin-top: 0; }
+  .roadmap-controls button { width: 24px; height: 24px; font-size: 14px; }
+  .progress-bar-bg { height: 6px; margin-top: 5px; }
+  .dashboard-container > .career-explorer { grid-column: 1; grid-row: 3; align-self: stretch; height: 100%; min-height: 0; padding: 10px 12px; overflow: hidden; }
+  .career-explorer .card-title { margin-bottom: 5px; font-size: 16px; }
+  .explorer-hint { font-size: 10px; }
+  .career-search-label { margin-bottom: 4px; font-size: 11px; }
+  .career-search-wrap { min-height: 34px; padding: 0 10px; }
+  .career-search-wrap input { font-size: 12px; }
+  .career-suggestions { gap: 5px; margin: 5px 0; }
+  .career-suggestion { padding: 4px 8px; font-size: 10px; }
+  .career-detail { gap: 8px; margin-top: 5px; padding: 7px 9px; }
+  .career-detail[hidden] { display: none; }
+  .career-detail strong { font-size: 12px; }
+  .career-detail p { font-size: 10px; line-height: 1.3; }
+  .career-opportunities { margin-top: 6px; padding-top: 6px; }
+  .career-opportunities .card-title { margin-bottom: 6px; font-size: 14px; }
+  .career-opportunities .opp-grid { grid-template-columns: repeat(3,minmax(0,1fr)); gap: 7px; }
+  .career-opportunities .opp-card { min-width: 0; padding: 7px 8px; }
+  .career-opportunities .opp-type { margin-bottom: 5px; font-size: 9px; }
+  .career-opportunities .opp-card h4 { margin: 3px 0 5px !important; font-size: 11px !important; line-height: 1.25; }
+  .career-opportunities .opp-card p { margin-bottom: 5px !important; font-size: 10px !important; }
+  .career-opportunities .opp-card .btn-sync { min-height: 26px; padding: 4px; font-size: 10px !important; }
+}
+
+/* A calmer sage-and-slate palette keeps lavender as a small accent. */
+body { background: radial-gradient(ellipse at 78% 0%,#edf3f1 0,transparent 34%),#f8f9f8; }
+.sidebar { background: linear-gradient(180deg,rgba(245,248,247,.98),rgba(239,244,242,.97)); border-right-color: #e1e8e5; }
+.brand::before { background: linear-gradient(145deg,#91b8ad,#78968d); }
+.brand span { color: #718b83; }
+.user-badge { border-color: #e1e8e5; background: rgba(255,255,255,.78); }
+.avatar { background: linear-gradient(145deg,#91b8ad,#78968d); }
+.nav-menu li a { color: #536374; }
+.nav-menu li a::before { color: #66847b; background: #e6efec; }
+.nav-menu li.active a,.nav-menu li a:hover { color: #344d49; background: #e4eeeb; box-shadow: inset 0 0 0 1px #d5e3de; }
+.sidebar::after { color: #6c817a; background: linear-gradient(135deg,#f2f6f4,#eaf1ee); }
+.top-bar { background: rgba(255,255,255,.86); }
+.welcome-card { background: radial-gradient(ellipse at 85% 100%,rgba(188,208,199,.36),transparent 31%),radial-gradient(ellipse at 100% 0%,rgba(222,232,227,.6),transparent 38%),linear-gradient(105deg,#edf3f1 0%,#fff 53%,#f2f6f4 100%); }
+.welcome-card::after { background: radial-gradient(ellipse at 79% 88%,rgba(143,174,161,.15) 0 13%,transparent 13.5%),radial-gradient(ellipse at 95% 85%,rgba(167,191,180,.18) 0 17%,transparent 17.5%),radial-gradient(ellipse at 65% 100%,rgba(196,214,205,.35) 0 23%,transparent 23.5%),radial-gradient(ellipse at 91% 110%,rgba(204,220,212,.46) 0 26%,transparent 26.5%); }
+.welcome-card::before { color: #8ca69d; }
+.roadmap-timeline::before { background: linear-gradient(90deg,#9bb8ae,#dce7e2); }
+.roadmap-node .node-circle { color: #67847b; background: #e8efec; box-shadow: 0 2px 10px rgba(89,122,109,.13); }
+.roadmap-node.completed .node-circle { background: #80aa98; }
+.roadmap-node.active .node-circle { background: #6d9289; box-shadow: 0 4px 15px rgba(91,128,116,.25); }
+.roadmap-node.active .node-title,.node-title,.roadmap-node.completed .node-title { color: #526a63; }
+.career-suggestion { border-color: #dce7e2; color: #536c64; background: #f1f5f3; }
+.career-suggestion:hover,.career-suggestion[aria-pressed="true"] { background: #e3eeea; }
+.career-search-wrap:focus-within { border-color: #9bb8ae; box-shadow: 0 0 0 4px rgba(109,146,137,.12); }
+.career-detail { background: linear-gradient(110deg,#f7f9f8,#eef3f1); }
+.career-detail-icon,.profile-section-list button.is-complete { color: #4f7066; background: #e9f1ee; }
+.profile-progress,.progress-bar-bg { background: #e9efec; }
+.profile-progress span,.progress-bar-fill { background: linear-gradient(90deg,#91b8ad,#668c81); }
+.profile-section-list button { border-color: #e1e8e5; color: #536574; }
+.profile-section-list button::before { color: #78968d; }
+.profile-section-list button:hover { border-color: #b7cbc4; background: #f1f6f3; }
+.profile-section-list button.is-complete { border-color: #c5d8d0; }
+.why-card .why-note { color: #58766c; background: linear-gradient(125deg,#f0f5f2,#f8faf9); }
+.why-card .why-note::before { color: #839d94; }
+.career-opportunities .opp-card { border-color: #e2e9e6; background: #fff; }
+.career-opportunities .opp-type { color: #55776e; background: #eaf2ef; }
+.career-suggestion,.skill-chip { border-color: #dce7e2; color: #526f66; background: #eef3f1; }
+.career-suggestion:hover,.career-suggestion[aria-pressed="true"] { color: #405b53; background: #e2ece8; }
+.career-detail-icon { color: #55766d; background: #e8f0ed; }
+.opportunity-dialog { border-color: #dce7e2; box-shadow: 0 24px 80px rgba(42,61,55,.18); }
+.opportunity-dialog::backdrop { background: rgba(38,55,50,.34); }
+.opportunity-dialog .dialog-deadline { background: #eef3f1; }
+.dialog-close { color: #526f66; background: #eef3f1; }
+.btn-view,.btn-sync { background: #6d9289; }
+.btn-view:hover,.btn-sync:hover { background: #587d74; }
+:focus-visible { outline-color: #8cac9f; }
+
+/* SAMVED reference palette: white and soft blue with less violet. */
+:root { --purple:#5d9bc5; --purple-dark:#3f7398; --ink:#2b4055; --ink-soft:#60788c; --muted:#78899a; --line:#dfe9f1; --paper:#fff; --shadow:0 8px 22px rgba(41,68,94,.06); }
+body { color:var(--ink); background:radial-gradient(ellipse at 78% 0%,#edf5fb 0,transparent 34%),#f6f9fc; }
+.sidebar { background:linear-gradient(180deg,#fbfcfd,#f1f6fb); border-right-color:#e0e9f1; }
+.brand::before,.avatar { background:linear-gradient(145deg,#8bb9d5,#6497bd); }
+.brand span { color:#6597bd; }
+.user-badge { border-color:#e0e9f1; background:rgba(255,255,255,.85); }
+.nav-menu li a { color:#536c82; }
+.nav-menu li a::before { color:#5d91b7; background:#e6f0f8; }
+.nav-menu li.active a,.nav-menu li a:hover { color:#315b7c; background:#e4f0fa; box-shadow:inset 0 0 0 1px #d5e6f3; }
+.sidebar::after { color:#66839a; background:linear-gradient(135deg,#f1f7fb,#eaf2f8); }
+.welcome-card { background:radial-gradient(ellipse at 88% 100%,rgba(188,216,235,.38),transparent 34%),linear-gradient(105deg,#edf5fb 0%,#fff 55%,#f2f8fc 100%); }
+.welcome-profile { border-color:#dce8f1; background:rgba(255,255,255,.86); }
+.welcome-profile-icon { color:#4d86b0; background:#e8f2f9; }
+.welcome-note { border-left-color:#dce8f1; color:#5c829d; }
+.roadmap-timeline::before { background:linear-gradient(90deg,#9fc3da,#deebf3); }
+.roadmap-node .node-circle { color:#4f86ad; background:#e8f2f9; box-shadow:0 2px 10px rgba(76,130,170,.14); }
+.roadmap-node.completed .node-circle,.roadmap-node.active .node-circle { background:#6d9fbd; }
+.roadmap-node.active .node-title,.node-title,.roadmap-node.completed .node-title { color:#536f84; }
+.career-suggestion,.skill-chip { border-color:#dce7ef; color:#4c7593; background:#eef5fa; }
+.career-suggestion:hover,.career-suggestion[aria-pressed="true"] { color:#355e7c; background:#e1eef7; }
+.career-search-wrap:focus-within { border-color:#8db8d3; box-shadow:0 0 0 4px rgba(93,155,197,.13); }
+.career-detail { background:linear-gradient(110deg,#f8fbfd,#eef5fa); }
+.career-detail-icon,.profile-section-list button.is-complete { color:#4e7d9f; background:#e8f2f9; }
+.profile-progress,.progress-bar-bg { background:#e8eff5; }
+.profile-progress span,.progress-bar-fill { background:linear-gradient(90deg,#82b2d1,#5d97bf); }
+.profile-section-list button { border-color:#dfe9f1; color:#526c80; }
+.profile-section-list button::before { color:#6d9fbd; }
+.profile-section-list button:hover { border-color:#a9c8dc; background:#f0f7fb; }
+.profile-section-list button.is-complete { border-color:#c6dce9; }
+.why-card .why-note { color:#4e7896; background:linear-gradient(125deg,#eef6fb,#f8fbfd); }
+.why-card .why-note::before { color:#78a9c8; }
+.career-opportunities .opp-card { border-color:#dfe9f1; }
+.career-opportunities .opp-type { color:#4e7d9f; background:#eaf3f9; }
+.btn-view,.btn-sync { background:#5d9bc5; }
+.btn-view:hover,.btn-sync:hover { background:#477fa7; }
+.opportunity-dialog { border-color:#dce7ef; box-shadow:0 24px 80px rgba(41,68,94,.2); }
+.opportunity-dialog::backdrop { background:rgba(39,62,80,.34); }
+.opportunity-dialog .dialog-deadline,.dialog-close { color:#4e7896; background:#edf5fa; }
+:focus-visible { outline-color:#80b0cf; }
+
+/* Compact pastel profile shell shared by dashboard, roadmap, and planner. */
+.sidebar { padding:16px 12px; background:linear-gradient(180deg,#fff 0%,#f7f9fe 100%); }
+.brand { position:relative; min-height:61px; padding:1px 5px 10px 53px; color:#29445e; font-size:19px; letter-spacing:-.35px; line-height:1.15; }
+.brand::before { position:absolute; top:0; left:5px; width:34px; height:34px; margin:0; border-radius:11px; background:linear-gradient(145deg,#9dc6df,#83aedd); }
+.brand span { display:block; margin-top:2px; color:#7197c6; }
+.user-badge { margin:0 3px 12px; padding:9px; border-color:#e5ebf3; border-radius:14px; background:linear-gradient(110deg,#f8faff,#f0f5fc); }
+.avatar { background:linear-gradient(145deg,#bdd1fa,#cfc4f5); color:#4867a4; }
+.nav-menu { gap:3px; }
+.nav-menu li a { min-height:38px; gap:9px; padding:7px 9px; border-radius:11px; color:#566b82; font-size:12px; }
+.nav-menu li a::before { width:23px; height:23px; flex-basis:23px; color:#6095bd; background:#eaf3fa; font-size:17px; }
+.nav-menu li.active a,.nav-menu li a:hover { color:#4e6898; background:#f0ecff; box-shadow:inset 0 0 0 1px #e2dcfa; }
+.sidebar::after { margin: auto 6px 6px; padding:11px 8px; border:1px solid #e8eef5; border-radius:13px; color:#75869e; background:linear-gradient(120deg,#f7f5ff,#eef8f6); font-size:12px; }
+.top-bar { flex:0 0 68px; min-height:68px; margin:8px 14px 0; padding:10px 18px; border:1px solid #e3ebf3; border-radius:16px; background:linear-gradient(110deg,#fff,#f4f8fd); }
+.page-header h2 { font:700 18px 'Nunito',sans-serif; }
+.card,.roadmap-wrapper { border-radius:15px; }
+@media (min-width:1100px) and (max-height:820px) {
+  .sidebar { padding:12px; }
+  .brand { min-height:51px; padding-bottom:5px; }
+  .user-badge { margin-bottom:8px; padding:7px 9px; }
+  .nav-menu { gap:1px; }
+  .nav-menu li a { min-height:34px; padding-top:5px; padding-bottom:5px; }
+  .sidebar::after { padding-top:7px; padding-bottom:7px; }
+}
+
+/* The same supplied brand asset and logout control are used across portal pages. */
+.brand { display:block; height:74px; min-height:74px; padding:0 3px 10px; }
+.brand::before { display:none; content:none; }
+.brand img { display:block; width:100%; height:100%; object-fit:contain; object-position:left center; }
+.sidebar-logout { flex:0 0 auto; display:flex; align-items:center; justify-content:center; gap:9px; min-height:38px; margin:10px 5px 3px; padding:7px 12px; border:1px solid #dce8f1; border-radius:11px; color:#4e7897; background:linear-gradient(110deg,#fff,#f1f7fb); font:700 12px 'Nunito','Segoe UI',sans-serif; cursor:pointer; }
+.sidebar-logout:hover,.sidebar-logout:focus,.sidebar-logout:focus-visible,.sidebar-logout:active { color:#5d4a9b !important; border-color:#c7b8ef !important; background:#eee8ff !important; outline:2px solid #d7caf7 !important; outline-offset:2px; box-shadow:none !important; transform:none !important; }
+.sidebar-logout-icon { font-size:17px; line-height:1; }
+.sidebar-logout-status { display:block; margin:0 10px; color:#76889a; font-size:10px; line-height:1.35; }
+.sidebar-logout-status:empty { display:none; }
+@media (min-width:1100px) and (max-height:820px) { .brand { height:65px; min-height:65px; padding-bottom:7px; } }
+@media (max-width:760px) { .brand { width:205px; height:68px; min-height:68px; padding:0 3px 8px; }.sidebar-logout { flex:0 0 auto; margin:8px 5px 0; } }

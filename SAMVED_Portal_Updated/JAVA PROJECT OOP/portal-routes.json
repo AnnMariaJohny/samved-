@@ -1,0 +1,15 @@
+{
+  "/auth/login.html": "/login.html",
+  "/auth/register.html": "/register.html",
+  "/auth/privacy.html": "/privacy.html",
+  "/profile/profile.html": "/profile/index.html",
+  "/profile/academic.html": "/academic-details/index.html",
+  "/profile/interests.html": "/interests/index.html",
+  "/profile/skills.html": "/skills/index.html",
+  "/profile/strengths.html": "/strengths/index.html",
+  "/profile/values.html": "/values/index.html",
+  "/profile/careergoal.html": "/career-goal/index.html",
+  "/assessment/assessment.html": "/form%20assessment/index.html",
+  "/roadmap-explorer/index.html": "/career%20roadmap/index.html",
+  "/roadmap-explorer/view.html": "/career%20roadmap/index.html"
+}

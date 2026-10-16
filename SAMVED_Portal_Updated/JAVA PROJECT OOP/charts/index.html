@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Analytics &amp; Visual Charts - SAMVED Portal</title>
+<link href="../portal-pages.css" rel="stylesheet"/>
+<link href="style.css" rel="stylesheet"/>
+<link href="/portal-live.css" rel="stylesheet"/><link href="/api/roadmap-hub.css" rel="stylesheet"/><link href="/api/roadmap-viewer.css" rel="stylesheet"/></head>
+<body data-page="charts">
+<div class="app-layout">
+<!-- TOP HEADER BAR -->
+<header class="portal-topbar">
+<a class="portal-brand" href="../dashboard/index.html">
+<span class="portal-brand-mark"><img alt="" src="/assets/samved-portal-logo.png?v=7d29b29b41"/></span><span class="portal-brand-name">SAMVED <span>Portal</span><small>Where your future finds its voice</small></span>
+</a>
+<div class="portal-search-wrap">
+<span class="portal-search-icon">🔍</span>
+<input class="portal-search-input" placeholder="Search analytics, grades, CGPA trends, or skills..." type="text"/>
+</div>
+<div class="portal-header-actions">
+<button aria-label="Notifications" class="portal-notif-btn" type="button">
+          🔔
+          <span class="portal-notif-dot"></span>
+</button>
+<div class="portal-user-profile" title="View Profile">
+<img alt="Anugrah" class="portal-user-avatar" src="../assets/user-avatar.png"/>
+<span class="portal-user-chevron">▼</span>
+</div>
+</div>
+</header>
+<!-- 3-COLUMN PORTAL GRID -->
+<div class="portal-body-grid">
+<!-- LEFT SIDEBAR -->
+<aside class="portal-sidebar">
+<ul class="portal-nav-list">
+<li class="portal-nav-item"><a class="portal-nav-link" href="../dashboard/index.html"><span class="portal-nav-icon">⌂</span> Home</a></li>
+<li class="portal-nav-item"><a class="portal-nav-link" href="../profile/index.html"><span class="portal-nav-icon">👤</span> Profile</a></li>
+<li class="portal-nav-item"><a class="portal-nav-link" href="../academic-details/index.html"><span class="portal-nav-icon">🎓</span> Academic Details</a></li>
+<li class="portal-nav-item"><a class="portal-nav-link" href="/career-goal/index.html"><span class="portal-nav-icon">🎯</span> Career Goal</a></li>
+<li class="portal-nav-item"><a class="portal-nav-link" href="../skills/index.html"><span class="portal-nav-icon">⚙</span> Skills</a></li>
+<li class="portal-nav-item"><a class="portal-nav-link" href="../interests/index.html"><span class="portal-nav-icon">♡</span> Interests</a></li>
+<li class="portal-nav-item"><a class="portal-nav-link" href="../strengths/index.html"><span class="portal-nav-icon">⭐</span> Strengths</a></li>
+<li class="portal-nav-item"><a class="portal-nav-link" href="../values/index.html"><span class="portal-nav-icon">💎</span> Values</a></li>
+<li class="portal-nav-item"><a class="portal-nav-link" href="../activities/index.html"><span class="portal-nav-icon">🧭</span> Activities</a></li>
+<li class="portal-nav-item"><a class="portal-nav-link" href="../progress%20tracker/index.html"><span class="portal-nav-icon">📈</span> Progress</a></li>
+<li class="portal-nav-item"><a class="portal-nav-link" href="../journal/index.html"><span class="portal-nav-icon">📖</span> Journals</a></li>
+<li class="portal-nav-item"><a class="portal-nav-link" href="../assessment/index.html"><span class="portal-nav-icon">📋</span> Assessment</a></li>
+<li class="portal-nav-item"><a class="portal-nav-link" href="../form%20assessment/index.html"><span class="portal-nav-icon">📝</span> Form Assessment</a></li>
+<li class="portal-nav-item"><a class="portal-nav-link" href="../career%20roadmap/index.html"><span class="portal-nav-icon">🗺️</span> Career Roadmap</a></li>
+<li class="portal-nav-item active"><a class="portal-nav-link active" href="../charts/index.html"><span class="portal-nav-icon">📊</span> Charts</a></li>
+<li class="portal-nav-item"><a class="portal-nav-link" href="../daily%20tasks/index.html"><span class="portal-nav-icon">📝</span> Daily Tasks</a></li>
+<li class="portal-nav-item"><a class="portal-nav-link" href="../planner/index.html"><span class="portal-nav-icon">📅</span> Planner</a></li>
+<li class="portal-nav-item"><a class="portal-nav-link" href="../deadline%20system/index.html"><span class="portal-nav-icon">⏳</span> Deadline System</a></li>
+<li class="portal-nav-item"><a class="portal-nav-link" href="../oppertunity%20page/index.html"><span class="portal-nav-icon">🌟</span> Opportunities</a></li>
+<li class="portal-nav-item"><a class="portal-nav-link" href="../recommondation%20page/index.html"><span class="portal-nav-icon">💡</span> Recommendations</a></li>
+</ul>
+<div class="portal-sidebar-footer">
+<div class="portal-sidebar-auth-group">
+<a class="portal-sidebar-btn login" href="../login.html"><span class="portal-nav-icon">🔑</span> Log In</a>
+<button class="portal-sidebar-btn logout" type="button"><span class="portal-nav-icon">🚪</span> Log Out</button>
+</div>
+<span class="portal-footer-airplane">✈</span>
+<div class="portal-footer-quote">
+            Small steps<br/>build<br/>big dreams ♡
+          </div>
+</div>
+</aside>
+<!-- CENTER MAIN CONTENT CARD -->
+<main class="portal-main-card"><div class="portal-card-header">
+<div class="portal-card-title-group">
+<div class="portal-header-icon">📊</div>
+<div>
+<h1 class="portal-page-title" id="page-title">Analytics &amp; Visual Charts</h1>
+<p class="portal-page-subtitle">Interactive visual insights across your academic performance and skill mastery.</p>
+</div>
+</div>
+<div class="portal-cute-badge">
+            Visual metrics ♡
+          </div>
+</div><p aria-live="polite" id="portal-status" role="status">Loading your account…</p><div id="portal-content"></div></main>
+<!-- RIGHT RAIL -->
+<aside class="portal-right-rail">
+<!-- Illustration Header Card -->
+<div class="portal-ill-card">
+<img alt="Analytics Progress" class="portal-ill-img contain" src="../assets/illustrations/PROGRESS.jpeg"/>
+</div>
+<!-- Metric Highlight Card -->
+<!-- Quote -->
+<div class="portal-quote-card">
+<p class="portal-quote-text">
+            Numbers reflect habits,<br/>dreams inspire the climb ♡ ✈
+          </p>
+</div>
+<div class="portal-info-card"><h3 class="portal-info-card-title">Your account</h3><p class="portal-info-card-text" id="account-summary"></p><a class="portal-info-card-link" href="/profile/index.html">Manage profile →</a></div></aside>
+</div>
+</div>
+<img alt="" aria-hidden="true" class="corner-leaves-left" src="../assets/corner-leaves-left.png"/>
+<img alt="" aria-hidden="true" class="corner-leaves-right" src="../assets/corner-leaves-right.png"/>
+<script src="/api/developer-a-api.js"></script><script src="/api/roadmap-viewer.js"></script><script src="/api/roadmap-hub.js"></script><script src="/portal-onboarding.js"></script><script src="/portal-app.js"></script></body>
+</html>

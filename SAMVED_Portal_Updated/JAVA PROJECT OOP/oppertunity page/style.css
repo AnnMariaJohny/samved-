@@ -1,0 +1,96 @@
+/* ==========================================================================
+   SAMVED Portal - Opportunity Discovery Styles
+   Lavender / Pastel Aesthetic Design System
+   ========================================================================== */
+@import url('../portal-pages.css');
+
+.opp-filter-tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 22px;
+}
+
+.filter-btn {
+  padding: 8px 16px;
+  border-radius: 99px;
+  border: 1.5px solid #e5e9f8;
+  background: #f8f9fe;
+  color: var(--portal-text-muted, #7c859d);
+  font-family: var(--font-body, 'Nunito', sans-serif);
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filter-btn:hover {
+  border-color: #cfd6f6;
+  background: #f0edfe;
+  color: #7663eb;
+}
+
+.filter-btn.active {
+  background: var(--portal-primary-gradient, linear-gradient(135deg, #7b68ee 0%, #a07cf8 100%));
+  color: #ffffff;
+  border-color: transparent;
+  box-shadow: 0 4px 12px rgba(118, 99, 235, 0.25);
+}
+
+.discovery-opp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 18px;
+}
+
+.discovery-card {
+  background: #ffffff;
+  border: 1.5px solid #edf0f8;
+  border-radius: 18px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 14px;
+  transition: all 0.2s ease;
+}
+
+.discovery-card:hover {
+  transform: translateY(-3px);
+  border-color: #d8ddf4;
+  box-shadow: 0 10px 24px rgba(118, 99, 235, 0.09);
+}
+
+.opp-type-badge {
+  padding: 4px 10px;
+  border-radius: 99px;
+  background: #f0edfe;
+  color: #7663eb;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.btn-save {
+  padding: 4px 10px;
+  border-radius: 8px;
+  border: 1px solid #e4e8f7;
+  background: #fafbff;
+  color: #7c859d;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-save:hover {
+  border-color: #f59e0b;
+  color: #d97706;
+}
+
+.btn-save.saved {
+  background: #fef3c7;
+  border-color: #fde68a;
+  color: #b45309;
+}
